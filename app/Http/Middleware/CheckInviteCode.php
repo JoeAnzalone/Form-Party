@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use \App\Invite;
 
 class CheckInviteCode
 {
@@ -17,10 +18,9 @@ class CheckInviteCode
     {
         $invite_code = $request->get('invite');
 
-        // TODO: Create an Invite object and check if it's unclaimed
-        $invite = ['code' => $invite_code];
-
-        if (!$invite_code) {
+        try {
+            $invite = Invite::where('code', $invite_code)->where('claimed_by', null)->firstOrFail();
+        } catch (\Exception $e) {
             return redirect('/')->with(['error' => 'wow']);
         }
 
