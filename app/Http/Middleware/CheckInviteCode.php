@@ -21,7 +21,7 @@ class CheckInviteCode
         try {
             $invite = Invite::where('code', $invite_code)->where('claimed_by', null)->firstOrFail();
         } catch (\Exception $e) {
-            return redirect('/')->with(['error' => 'wow']);
+            return redirect('/');
         }
 
         $request->attributes->add(['invite' => $invite]);
