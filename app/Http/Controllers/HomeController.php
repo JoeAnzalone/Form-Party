@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Message;
 
 class HomeController extends Controller
 {
@@ -25,7 +26,7 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $messages = $user->messages;
+        $messages = $user->messages->where('status_id', Message::STATUS_UNANSWERED);
         $invites = $user->invites;
 
         return view('home', ['messages' => $messages, 'invites' => $invites]);

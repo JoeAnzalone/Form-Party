@@ -20,4 +20,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 Route::post('/messages', 'MessageController@store');
+Route::get('/messages/{message_id}/answer', 'MessageController@answerForm')->name('message.answer');
+Route::put('/messages/{message_id}/answer', 'MessageController@answer');
 Route::get('/{username}', 'UserController@profile');

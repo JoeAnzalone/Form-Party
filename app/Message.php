@@ -18,4 +18,9 @@ class Message extends Model
 
         return $statuses[$this->status_id];
     }
+
+    protected function recipient()
+    {
+        return $this->belongsTo('App\User', 'user_id');
+    }
 }
