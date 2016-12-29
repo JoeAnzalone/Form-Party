@@ -8,6 +8,17 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
+                    <h2>Your {{ str_plural('Message', count($messages)) }}</h2>
+
+                    @if (count($messages))
+                        @foreach ($messages as $message)
+                            <pre>{{ $message->body }}</pre>
+                        @endforeach
+                    @else
+                        <p>You have no messages</p>
+                    @endif
+
+
                     <h2>Your {{ str_plural('Invite', count($invites)) }}</h2>
 
                     @if (count($invites))

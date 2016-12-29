@@ -25,7 +25,9 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $invites = $user->invites()->get();
-        return view('home', ['invites' => $invites]);
+        $messages = $user->messages;
+        $invites = $user->invites;
+
+        return view('home', ['messages' => $messages, 'invites' => $invites]);
     }
 }
