@@ -20,4 +20,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 Route::post('/messages', 'MessageController@store');
-Route::get('/{username}', 'MessageController@create');
+Route::get('/{username}', 'UserController@profile');
