@@ -25,9 +25,16 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        $message = $request->input('message');
-        $recipient_username = $request->input('recipient_username');
-        dump($recipient_username);
-        dd($message);
+        $message_body = $request->input('message');
+        $recipient_id = $request->input('recipient_id');
+
+        $message = new \App\Message();
+        $message->body = $message_body;
+        $message->user_id = $recipient_id;
+        $message->from_ip = $request->ip();
+
+        $message->save();
+        $recipient = \App\User::findOrFail($recipient_id);
+        return redirect($recipient->username)->with('success', sprintf('Message sent to %s! 😃', $recipient->username));
     }
 }

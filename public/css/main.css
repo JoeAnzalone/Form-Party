@@ -24,3 +24,7 @@
 .claimed a {
     color: #444;
 }
+
+.alert {
+    text-align: center;
+}

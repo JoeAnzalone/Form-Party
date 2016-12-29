@@ -80,6 +80,18 @@
             </div>
         </nav>
 
+        @if (!empty(\Session::get('success')))
+            <div class="alert alert-success">
+            {!! \Session::get('success') !!}
+            </div>
+        @endif
+
+        @if (!empty(\Session::get('error')))
+            <div class="alert alert-error">
+            {!! \Session::get('error') !!}
+            </div>
+        @endif
+
         @yield('content')
     </div>
 

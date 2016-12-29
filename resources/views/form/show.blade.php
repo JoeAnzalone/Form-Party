@@ -11,7 +11,7 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/messages') }}">
                         {{ csrf_field() }}
 
-                        <input name="recipient_username" type="hidden" value="{{ $user['username'] }}">
+                        <input name="recipient_id" type="hidden" value="{{ $user['id'] }}">
 
                         <div class="form-group{{ $errors->has('message') ? ' has-error' : '' }}">
                             <label for="message" class="col-md-4 control-label">Message for {{ $user['username'] }}</label>
