@@ -21,7 +21,7 @@
                             <label for="answer" class="col-md-4 control-label">Answer</label>
 
                             <div class="col-md-6">
-                                <textarea rows="10" id="answer" class="form-control" name="answer" value="{{ old('answer') }}" required></textarea>
+                                <textarea rows="10" id="answer" class="form-control" name="answer" value="{{ old('answer') }}"></textarea>
 
                                 @if ($errors->has('answer'))
                                 <span class="help-block">
