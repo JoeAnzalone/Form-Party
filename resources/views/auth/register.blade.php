@@ -9,7 +9,11 @@
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url()->full() }}">
                         {{ csrf_field() }}
-                        <input name="invite_code" type="hidden" value="{{ $invite->code }}">
+
+                        @if ($invite)
+                            <input name="invite_code" type="hidden" value="{{ $invite->code }}">
+                        @endif
+
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Name</label>
 

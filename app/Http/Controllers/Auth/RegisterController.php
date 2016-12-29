@@ -38,7 +38,10 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
-        $this->middleware('invited');
+
+        if (config('app.invite_only', false)) {
+            $this->middleware('invited');
+        }
     }
 
     /**
@@ -65,9 +68,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $invite_code = $data['invite_code'];
-        $invite = \App\Invite::where('code', $invite_code)->where('claimed_by', null)->firstOrFail();
-
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -75,7 +75,11 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
 
-        $user->inviteUsed()->save($invite);
+        if (!empty($data['invite_code'])) {
+            $invite_code = $data['invite_code'];
+            $invite = \App\Invite::where('code', $invite_code)->where('claimed_by', null)->firstOrFail();
+            $user->inviteUsed()->save($invite);
+        }
 
         return $user;
     }

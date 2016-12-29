@@ -58,11 +58,22 @@ return [
     | Force SSL
     |--------------------------------------------------------------------------
     |
-    | Whetheror not to redirect HTTP requests to HTTPS
+    | Whether or not to redirect HTTP requests to HTTPS
     |
     */
 
     'force_https' => env('APP_FORCE_HTTPS', false),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Invite Only
+    |--------------------------------------------------------------------------
+    |
+    | Whether or not to require invite codes for new registrations
+    |
+    */
+
+    'invite_only' => env('APP_INVITE_ONLY', false),
 
     /*
     |--------------------------------------------------------------------------
