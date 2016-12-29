@@ -8,7 +8,17 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    You are logged in!
+                    <h2>Your {{ str_plural('Invite', count($invites)) }}</h2>
+
+                    @if (count($invites))
+                        <ul>
+                        @foreach ($invites as $invite)
+                            <li class="{{ $invite->claimed_by ? 'claimed' : 'unclaimed' }}"><a href="{{ $invite->url }}">{{ $invite->url }}</a></li>
+                        @endforeach
+                        </ul>
+                    @else
+                        <p>You have no invites</p>
+                    @endif
                 </div>
             </div>
         </div>
