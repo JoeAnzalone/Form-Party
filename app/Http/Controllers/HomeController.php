@@ -26,7 +26,7 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $messages = $user->messages->where('status_id', Message::STATUS_UNANSWERED);
+        $messages = $user->messages->where('status_id', Message::STATUS_UNANSWERED)->sortByDesc('created_at');
         $invites = $user->invites;
 
         return view('home', ['messages' => $messages, 'invites' => $invites]);

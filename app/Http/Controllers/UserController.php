@@ -15,7 +15,7 @@ class UserController extends Controller
     public function profile(string $username)
     {
         $user = User::where('username', $username)->firstOrFail();
-        $messages = $user->messages->where('status_id', Message::STATUS_ANSWERED_PUBLICLY);
+        $messages = $user->messages->where('status_id', Message::STATUS_ANSWERED_PUBLICLY)->sortByDesc('updated_at');
 
         return view('user.profile', ['user' => $user, 'messages' => $messages]);
     }
