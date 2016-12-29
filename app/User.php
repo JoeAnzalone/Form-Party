@@ -31,4 +31,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Invite');
     }
+
+    public function inviteUsed()
+    {
+        return $this->hasMany('App\Invite', 'claimed_by');
+    }
 }
