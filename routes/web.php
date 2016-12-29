@@ -19,4 +19,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/{username}', 'FormController@show');
+Route::post('/messages', 'MessageController@store');
+Route::get('/{username}', 'MessageController@create');
