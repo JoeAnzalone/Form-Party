@@ -25,3 +25,26 @@
 .alert {
     text-align: center;
 }
+
+.user-info {
+    margin-left: 115px;
+}
+
+.user-avatar {
+    width: 100px;
+    height: 100px;
+    float: left;
+}
+
+.user-username {
+    display: inline-block;
+    margin: 0;
+}
+
+.separator {
+    margin: 0 5px;
+}
+
+.user-bio {
+    margin: 10px 0;
+}

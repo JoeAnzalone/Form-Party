@@ -51,4 +51,27 @@ class User extends Authenticatable
     {
         return ($this->invites->count());
     }
+
+    public function getUsernamePossessiveAttribute()
+    {
+        return sprintf(
+            '%s%s',
+            $this->username,
+            ends_with($this->username, 's') ? "'" : "'s"
+        );
+    }
+
+    public function avatar($size = 80)
+    {
+        $email = trim($this->email);
+        $email = strtolower($email);
+        $hash = md5($email);
+
+        $query_string = http_build_query([
+            'd' => 'monsterid',
+            's' => $size,
+        ]);
+
+        return 'https://www.gravatar.com/avatar/' . $hash . '?' . $query_string;
+    }
 }
