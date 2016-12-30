@@ -1,13 +1,13 @@
-<form class="form-horizontal" role="form" method="POST" action="{{ url('/messages') }}">
+<form class="form-horizontal" method="POST" action="{{ url('/messages') }}">
     {{ csrf_field() }}
 
     <input name="recipient_id" type="hidden" value="{{ $user['id'] }}">
 
     <div class="form-group{{ $errors->has('message') ? ' has-error' : '' }}">
-        <label for="message" class="col-md-4 control-label">Message for {{ $user['username'] }}</label>
+        <label for="message" class="col-md-12 control-label">Message for {{ $user['username'] }}</label>
 
-        <div class="col-md-6">
-            <textarea rows="10" id="message" class="form-control" name="message" value="{{ old('message') }}" required></textarea>
+        <div class="col-md-12">
+            <textarea rows="10" id="message" class="form-control" name="message" required>{{ old('message') }}</textarea>
 
             @if ($errors->has('message'))
             <span class="help-block">
@@ -18,8 +18,8 @@
     </div>
 
     <div class="form-group">
-        <div class="col-md-6 col-md-offset-4">
-            <button type="submit" class="btn btn-primary">Send</button>
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-primary pull-right">Send</button>
         </div>
     </div>
 
