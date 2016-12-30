@@ -8,19 +8,7 @@ use App\Message;
 class MessageController extends Controller
 {
     /**
-     * Show the message form.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(string $username)
-    {
-        $user = \App\User::where('username', $username)->firstOrFail();
-
-        return view('form.show', ['user' => $user]);
-    }
-
-    /**
-     * Show the form.
+     * Store the message
      *
      * @return \Illuminate\Http\Response
      */

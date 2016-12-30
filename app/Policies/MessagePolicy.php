@@ -54,7 +54,7 @@ class MessagePolicy
      */
     public function answer(User $user, Message $message)
     {
-        return $user->is($message->recipient);
+        return $user->is($message->recipient) && !$message->trashed();
     }
 
     /**
