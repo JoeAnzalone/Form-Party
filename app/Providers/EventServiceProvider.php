@@ -25,6 +25,8 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot();
 
-        //
+         \App\User::created(function($user) {
+            event(new \App\Events\UserCreated($user));
+        });
     }
 }
