@@ -76,7 +76,7 @@ class RegisterController extends Controller
 
         if (!empty($data['invite_code'])) {
             $invite_code = $data['invite_code'];
-            $invite = \App\Invite::where('code', $invite_code)->where('claimed_by', null)->firstOrFail();
+            $invite = \App\Invite::where('code', $invite_code)->where('claimed_by_id', null)->firstOrFail();
             $user->inviteUsed()->save($invite);
         }
 

@@ -24,7 +24,7 @@
                             <li>
                                 <a class="{{ $invite->claimed_by ? 'claimed' : 'unclaimed' }}" href="{{ $invite->url }}">{{ $invite->url }}</a>
                                 @if ($invite->claimed_by)
-                                - claimed by <a href="{{ route('profile', $invite->used_by->username) }}">{{ $invite->used_by->username }}</a>
+                                - claimed by <a href="{{ route('profile', $invite->claimed_by->username) }}">{{ $invite->claimed_by->username }}</a>
                                 @endif
                             </li>
                         @endforeach

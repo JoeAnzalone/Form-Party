@@ -19,7 +19,7 @@ class CheckInviteCode
         $invite_code = $request->get('invite');
 
         try {
-            $invite = Invite::where('code', $invite_code)->where('claimed_by', null)->firstOrFail();
+            $invite = Invite::where('code', $invite_code)->where('claimed_by_id', null)->firstOrFail();
         } catch (\Exception $e) {
             return redirect('/');
         }
