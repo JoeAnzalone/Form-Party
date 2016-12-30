@@ -13,7 +13,9 @@ class RenameInvitesColumn extends Migration
      */
     public function up()
     {
-        //
+        Schema::table('invites', function(Blueprint $table) {
+           $table->renameColumn('claimed_by', 'claimed_by_id');
+        });
     }
 
     /**
@@ -23,6 +25,8 @@ class RenameInvitesColumn extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('invites', function(Blueprint $table) {
+           $table->renameColumn('claimed_by_id', 'claimed_by');
+        });
     }
 }
