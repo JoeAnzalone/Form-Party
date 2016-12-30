@@ -18,7 +18,7 @@
                         <p>Unfortunately all your invite codes have been used up :(</p>
                     @endif
 
-                    <ul>
+                    <ul class="invite-codes">
                     @foreach ($invites as $invite)
                         <li>
                             <code><a class="{{ $invite->claimed_by ? 'claimed' : 'unclaimed' }}" href="{{ $invite->url }}">{{ $invite->code }}</a></code>
@@ -33,4 +33,14 @@
         </div>
     </div>
 </div>
+
+<script type="text/JavaScript">
+    document.querySelectorAll('.invite-codes .unclaimed').forEach(function(el) {
+        el.addEventListener('click', function(e) {
+            e.preventDefault();
+            prompt('Send this special URL to a special friend! ♥️', el.href);
+            return false;
+        });
+    });
+</script>
 @endsection
