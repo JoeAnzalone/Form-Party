@@ -30,7 +30,6 @@ class GiveInvites
 
         for ($i = 0; $i < $invite_count; $i++) {
             $invite = new \App\Invite();
-            $invite->code = \Illuminate\Support\Str::random(32);
 
             $event->user->invites()->save($invite);
         }
