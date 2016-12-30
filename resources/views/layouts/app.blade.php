@@ -69,6 +69,12 @@
             </div>
         @endif
 
+        @if (!empty(\Session::get('info')))
+            <div class="alert alert-info">
+            {!! \Session::get('info') !!}
+            </div>
+        @endif
+
         @if (!empty(\Session::get('error')))
             <div class="alert alert-error">
             {!! \Session::get('error') !!}

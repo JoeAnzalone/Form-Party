@@ -18,6 +18,11 @@ class Invite extends Model
         return \URL::route('register', ['invite' => $this->code]);
     }
 
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
     public function claimed_by()
     {
         return $this->belongsTo('App\User');
