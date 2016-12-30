@@ -47,6 +47,7 @@ class MessageController extends Controller
     public function answerForm(int $message_id)
     {
         $message = \App\Message::find($message_id);
+        $this->authorize('answer', $message);
 
         return view('message.answer_form', ['message' => $message]);
     }
@@ -58,9 +59,10 @@ class MessageController extends Controller
      */
     public function answer(int $message_id, Request $request)
     {
-        $answer = $request->input('answer');
-
         $message = Message::find($message_id);
+        $this->authorize('answer', $message);
+
+        $answer = $request->input('answer');
         $message->answer = $answer;
         $message->status_id = Message::STATUS_ANSWERED_PUBLICLY;
         $message->save();

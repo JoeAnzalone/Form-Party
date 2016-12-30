@@ -46,6 +46,18 @@ class MessagePolicy
     }
 
     /**
+     * Determine whether the user can answer the message.
+     *
+     * @param  \App\User  $user
+     * @param  \App\Message  $message
+     * @return mixed
+     */
+    public function answer(User $user, Message $message)
+    {
+        return $user->is($message->recipient);
+    }
+
+    /**
      * Determine whether the user can delete the message.
      *
      * @param  \App\User  $user
