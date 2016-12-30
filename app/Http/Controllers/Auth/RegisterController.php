@@ -92,15 +92,17 @@ class RegisterController extends Controller
      {
         $invite = $request->attributes->get('invite');
 
-        $request->session()->flash(
-            'info',
-            sprintf(
-                '<a target="_blank" href="%s">%s</a> has invited you to check out %s!',
-                route('profile', $invite->user->username),
-                $invite->user->username,
-                config('app.name')
-            )
-        );
+        if ($invite) {
+            $request->session()->flash(
+                'info',
+                sprintf(
+                    '<a target="_blank" href="%s">%s</a> has invited you to check out %s!',
+                    route('profile', $invite->user->username),
+                    $invite->user->username,
+                    config('app.name')
+                )
+            );
+        }
 
         return view('auth.register', ['title' => 'Register', 'invite' => $invite]);
      }
