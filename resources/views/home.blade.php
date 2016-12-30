@@ -11,13 +11,10 @@
                     <h2>Your {{ str_plural('Message', count($messages)) }}</h2>
 
                     @if (count($messages))
-                        @foreach ($messages as $message)
-                            <pre>{{ $message->body }}</pre>
-                        @endforeach
+                        @include('message.index', ['messages' => $messages])
                     @else
                         <p>You have no messages</p>
                     @endif
-
 
                     <h2>Your {{ str_plural('Invite', count($invites)) }}</h2>
 

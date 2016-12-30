@@ -15,7 +15,7 @@
 
                 <div class="panel-body">
                     @include('user.form', ['user' => $user])
-                    @include('user.published_messages', ['messages' => $messages])
+                    @include('message.index', ['messages' => $messages])
                 </div>
             </div>
         </div>
