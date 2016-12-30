@@ -91,6 +91,6 @@ class RegisterController extends Controller
      public function showRegistrationForm(Request $request)
      {
         $invite = $request->attributes->get('invite');
-        return view('auth.register', ['title' => 'Login', 'invite' => $invite]);
+        return view('auth.register', ['title' => 'Register', 'invite' => $invite]);
      }
 }
