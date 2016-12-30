@@ -10,4 +10,9 @@ class Invite extends Model
     {
         return \URL::route('register', ['invite' => $this->code]);
     }
+
+    public function used_by()
+    {
+        return $this->belongsTo('App\User', 'claimed_by');
+    }
 }

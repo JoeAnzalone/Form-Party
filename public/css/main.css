@@ -19,9 +19,6 @@
     opacity: 0.5;
     text-decoration: line-through;
     pointer-events: none;
-}
-
-.claimed a {
     color: #444;
 }
 
