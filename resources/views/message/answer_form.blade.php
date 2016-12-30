@@ -8,7 +8,7 @@
             <div class="panel panel-default">
                 <div class="panel-body">
 
-                    <blockquote>{{ $message['body'] }}</blockquote>
+                    <blockquote>{!! nl2br(e($message['body'])) !!}</blockquote>
 
                     <form class="form-horizontal" method="POST" action="{{ route('message.answer', $message) }}">
                         {{ method_field('PUT') }}
