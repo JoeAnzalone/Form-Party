@@ -18,7 +18,7 @@
                             <label for="answer" class="col-md-12 control-label">Answer</label>
 
                             <div class="col-md-12">
-                                <textarea rows="10" id="answer" class="form-control" name="answer">{{ old('answer') }}</textarea>
+                                <textarea rows="10" id="answer" class="form-control" name="answer" autofocus>{{ old('answer', $message['answer']) }}</textarea>
 
                                 @if ($errors->has('answer'))
                                 <span class="help-block">
