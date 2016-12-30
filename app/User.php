@@ -32,6 +32,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Message');
     }
 
+    public function getUnansweredMessageCountAttribute()
+    {
+        return $this->messages->where('status_id', Message::STATUS_UNANSWERED)->count();
+    }
+
     public function invites()
     {
         return $this->hasMany('App\Invite');

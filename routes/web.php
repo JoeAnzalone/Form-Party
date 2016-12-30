@@ -13,10 +13,10 @@
 
 Auth::routes();
 
-Route::get('/', 'MessageController@inbox');
+Route::get('/', 'MessageController@inbox')->name('inbox');
 
 Route::post('/messages', 'MessageController@store');
 Route::get('/messages/{message_id}/answer', 'MessageController@answerForm')->name('message.answer');
 Route::put('/messages/{message_id}/answer', 'MessageController@answer');
 
-Route::get('/{username}', 'UserController@profile');
+Route::get('/{username}', 'UserController@profile')->name('profile');
