@@ -25,4 +25,20 @@ class UserController extends Controller
 
         return view('user.profile', ['title' =>  $title, 'user' => $user, 'messages' => $messages]);
     }
+
+    /**
+     * Show the user's list of invite codes.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function listInvites()
+    {
+        $user = \Auth::user();
+        if (!$user->has_invites) {
+            abort(404);
+        }
+
+        $invites = $user->invites;
+        return view('user.invites', ['invites' => $invites]);
+    }
 }

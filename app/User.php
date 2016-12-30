@@ -46,4 +46,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Invite', 'claimed_by_id');
     }
+
+    public function getHasInvitesAttribute()
+    {
+        return ($this->invites->count());
+    }
 }

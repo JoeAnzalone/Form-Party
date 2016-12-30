@@ -50,10 +50,13 @@
                             <li><a href="{{ url('/login') }}">Login</a></li>
                             <li><a href="{{ url('/register') }}">Register</a></li>
                         @else
-                            <li><a href="{{ route('profile', Auth::user()->username) }}">{{ Auth::user()->username }}</a></li>
                             <li><a href="{{ route('inbox') }}">Inbox
                             @if (Auth::user()->unanswered_message_count) <span class="badge">{{ Auth::user()->unanswered_message_count }}</span> @endif
                             </a></li>
+                            <li><a href="{{ route('profile', Auth::user()->username) }}">{{ Auth::user()->username }}</a></li>
+                            @if (Auth::user()->has_invites && config('app.invite_only'))
+                            <li><a href="{{ route('invite') }}">Invite</a></li>
+                            @endif
                         @endif
                     </ul>
                 </div>

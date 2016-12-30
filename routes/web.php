@@ -19,4 +19,6 @@ Route::post('/messages', 'MessageController@store');
 Route::get('/messages/{message_id}/answer', 'MessageController@answerForm')->name('message.answer');
 Route::put('/messages/{message_id}/answer', 'MessageController@answer');
 
+Route::get('/invite', 'UserController@listInvites')->name('invite');
+
 Route::get('/{username}', 'UserController@profile')->name('profile');
