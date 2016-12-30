@@ -2,11 +2,37 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Message;
 
 class MessageController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => 'store']);
+    }
+
+    /**
+     * Show the user's unanswered messages
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function inbox()
+    {
+        $user = Auth::user();
+        $messages = $user->messages->where('status_id', Message::STATUS_UNANSWERED)->sortByDesc('created_at');
+        $invites = $user->invites;
+
+        return view('message.inbox', ['messages' => $messages, 'invites' => $invites]);
+    }
+
     /**
      * Store the message
      *
