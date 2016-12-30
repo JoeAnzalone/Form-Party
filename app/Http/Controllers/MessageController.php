@@ -29,7 +29,7 @@ class MessageController extends Controller
         $user = Auth::user();
         $messages = $user->messages->where('status_id', Message::STATUS_UNANSWERED)->sortByDesc('created_at');
 
-        return view('message.inbox', ['messages' => $messages]);
+        return view('message.inbox', ['title' =>  'Inbox', 'messages' => $messages]);
     }
 
     /**
