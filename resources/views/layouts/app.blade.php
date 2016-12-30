@@ -47,15 +47,15 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li {!! 'login' === Route::current()->getName() ? 'class="active"' : '' !!}><a href="{{ url('/login') }}">Login</a></li>
-                            <li {!! 'register' === Route::current()->getName() ? 'class="active"' : '' !!}><a href="{{ url('/register') }}">Register</a></li>
+                            <li {!! Route::is('login') ? 'class="active"' : '' !!}><a href="{{ url('/login') }}">Login</a></li>
+                            <li {!! Route::is('register') ? 'class="active"' : '' !!}><a href="{{ url('/register') }}">Register</a></li>
                         @else
-                            <li {!! 'inbox' === Route::current()->getName() ? 'class="active"' : '' !!}><a href="{{ route('inbox') }}">Inbox
+                            <li {!! Route::is('inbox') ? 'class="active"' : '' !!}><a href="{{ route('inbox') }}">Inbox
                             @if (Auth::user()->unanswered_message_count) <span class="badge">{{ Auth::user()->unanswered_message_count }}</span> @endif
                             </a></li>
-                            <li {!! !empty($user) && $user->username === Auth::user()->username && 'profile' === Route::current()->getName() ? 'class="active"' : '' !!}><a href="{{ route('profile', Auth::user()->username) }}">{{ Auth::user()->username }}</a></li>
+                            <li {!! !empty($user) && $user->username === Auth::user()->username && Route::is('profile') ? 'class="active"' : '' !!}><a href="{{ route('profile', Auth::user()->username) }}">{{ Auth::user()->username }}</a></li>
                             @if (Auth::user()->has_invites && config('app.invite_only'))
-                            <li {!! 'invite' === Route::current()->getName() ? 'class="active"' : '' !!}><a href="{{ route('invite') }}">Invite</a></li>
+                            <li {!! Route::is('invite') ? 'class="active"' : '' !!}><a href="{{ route('invite') }}">Invite</a></li>
                             @endif
                         @endif
                     </ul>
