@@ -27,7 +27,7 @@ class MessageController extends Controller
     public function inbox()
     {
         $user = Auth::user();
-        $messages = $user->messages->where('status_id', Message::STATUS_UNANSWERED)->sortByDesc('created_at');
+        $messages = $user->messages()->where('status_id', Message::STATUS_UNANSWERED)->orderBy('created_at', 'desc')->paginate(10);
 
         return view('message.inbox', ['title' =>  'Inbox', 'messages' => $messages]);
     }

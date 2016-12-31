@@ -13,3 +13,7 @@
     </div>
 </div>
 @endforeach
+
+<div class="pagination-wrapper">
+    {{ $messages->links() }}
+</div>
