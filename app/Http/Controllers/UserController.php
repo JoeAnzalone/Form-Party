@@ -29,9 +29,24 @@ class UserController extends Controller
         $user = User::where('username', $username)->firstOrFail();
         $messages = $user->messages->where('status_id', Message::STATUS_ANSWERED_PUBLICLY)->sortByDesc('updated_at');
 
-        $title = sprintf('%s Form Party', $user->username_possessive);
+        $title = sprintf('%s Form Party', title_case($user->username_possessive));
 
-        return view('user.profile', ['title' =>  $title, 'user' => $user, 'messages' => $messages]);
+        $open_graph = [
+            'title' => $title . ' 🎉',
+            'description' => sprintf('Send %s a message — anonymously! It\'s like a party 🎊', $user->username),
+            'site_name' => config('app.name'),
+            'image' => $user->avatar(200),
+            'type' => 'profile',
+            'profile:username' => $user->username,
+            'url' => route('profile', $user->username),
+        ];
+
+        return view('user.profile', [
+            'title' =>  $title,
+            'og' =>  $open_graph,
+            'user' => $user,
+            'messages' => $messages,
+        ]);
     }
 
     /**

@@ -9,6 +9,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ !empty($title) ? $title . ' :: ' : '' }}{{ config('app.name', 'Laravel') }} 🎉</title>
+    @if (!empty($og))
+        @foreach ($og as $key => $value)
+            <meta property="og:{{ $key }}" content="{{ $value }}">
+        @endforeach
+    @endif
 
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,300,400,600" rel="stylesheet" type="text/css">
