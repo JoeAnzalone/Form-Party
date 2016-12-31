@@ -29,5 +29,9 @@ class EventServiceProvider extends ServiceProvider
          \App\User::created(function($user) {
             event(new \App\Events\UserCreated($user));
         });
+
+         \App\Message::created(function($message) {
+            event(new \App\Events\MessageSent($message));
+        });
     }
 }

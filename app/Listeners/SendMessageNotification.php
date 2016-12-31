@@ -6,6 +6,8 @@ use App\Events\MessageSent;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
+use App\Notifications\NewMessage;
+
 class SendMessageNotification
 {
     /**
@@ -26,6 +28,7 @@ class SendMessageNotification
      */
     public function handle(MessageSent $event)
     {
-        //
+        $message = $event->message;
+        $message->recipient->notify(new NewMessage($message));
     }
 }
