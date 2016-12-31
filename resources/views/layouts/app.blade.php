@@ -11,7 +11,7 @@
     <title>{{ !empty($title) ? $title . ' :: ' : '' }}{{ config('app.name', 'Laravel') }} 🎉</title>
     @if (!empty($og))
         @foreach ($og as $key => $value)
-            <meta property="og:{{ $key }}" content="{{ $value }}">
+            <meta property="{{ $key }}" content="{{ $value }}">
         @endforeach
     @endif
 

@@ -32,13 +32,13 @@ class UserController extends Controller
         $title = sprintf('%s Form Party', title_case($user->username_possessive));
 
         $open_graph = [
-            'title' => $title . ' 🎉',
-            'description' => sprintf('Send %s a message — anonymously! It\'s like a party 🎊', $user->username),
-            'site_name' => config('app.name'),
-            'image' => $user->avatar(200),
-            'type' => 'profile',
+            'og:title' => $title . ' 🎉',
+            'og:description' => sprintf('Send %s a message — anonymously! It\'s like a party 🎊', $user->username),
+            'og:site_name' => config('app.name'),
+            'og:image' => $user->avatar(200),
+            'og:url' => route('profile', $user->username),
+            'og:type' => 'profile',
             'profile:username' => $user->username,
-            'url' => route('profile', $user->username),
         ];
 
         return view('user.profile', [
