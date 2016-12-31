@@ -61,6 +61,20 @@ class User extends Authenticatable
         );
     }
 
+    public function setWebsiteAttribute(string $url)
+    {
+        if (!starts_with($url, 'http://') && !starts_with($url, 'https://')) {
+            $url = 'http://' . $url;
+        }
+
+        $this->attributes['website'] = $url;
+    }
+
+    public function getWebsiteWithoutProtocolAttribute()
+    {
+        return str_replace(['http://','https://'], '', $this->website);
+    }
+
     public function avatar($size = 80)
     {
         $email = trim($this->email);

@@ -10,7 +10,7 @@
                     <img class="user-avatar" src="{{ $user->avatar(200) }}" width="100" title="{{ $user->username_possessive }} avatar" alt="{{ $user->username_possessive }} avatar">
                     <div class="user-info">
                         <h3 class="user-username">{{ $user->username }}</h3>
-                        @if ($user->website) <span class="separator">❥</span> <a class="user-website" target="_blank" href="{{ $user->website }}">{{ $user->website }}</a> @endif
+                        @if ($user->website) <span class="separator">❥</span> <a class="user-website" target="_blank" href="{{ $user->website }}">{{ $user->website_without_protocol }}</a> @endif
                         <div class="user-joined">Partying since {{ $user->created_at->format('F Y') }}</div>
                         <div class="user-bio">{!! nl2br(e($user->bio)) !!}</div>
                     </div>
