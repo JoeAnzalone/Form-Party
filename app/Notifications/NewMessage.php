@@ -7,6 +7,8 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
+use App\Message;
+
 class NewMessage extends Notification
 {
     use Queueable;
@@ -16,9 +18,9 @@ class NewMessage extends Notification
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Message $message)
     {
-        //
+        $this->message = $message;
     }
 
     /**
@@ -41,9 +43,9 @@ class NewMessage extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', 'https://laravel.com')
-                    ->line('Thank you for using our application!');
+                    ->line('You\'ve got a new anonymous message!')
+                    ->action('Answer it', route('message.answer', $this->message))
+                    ->line('Have a nice day!');
     }
 
     /**
