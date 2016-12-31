@@ -21,4 +21,7 @@ Route::put('/messages/{message_id}/answer', 'MessageController@answer');
 
 Route::get('/invite', 'UserController@listInvites')->name('invite');
 
+Route::get('/settings', 'UserController@settings')->name('settings');
+Route::put('/settings', 'UserController@saveSettings');
+
 Route::get('/{username}', 'UserController@profile')->name('profile');

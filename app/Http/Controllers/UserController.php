@@ -2,11 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\User;
 use App\Message;
 
 class UserController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => 'profile']);
+    }
+
     /**
      * Show the user's profile.
      *
@@ -36,5 +47,27 @@ class UserController extends Controller
 
         $invites = $user->invites;
         return view('user.invites', ['title' =>  'Invite', 'invites' => $invites]);
+    }
+
+    /**
+     * Show the User settings screen
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function settings()
+    {
+        $user = \Auth::user();
+
+        return view('user.settings', ['title' =>  'Settings', 'user' => $user]);
+    }
+
+    /**
+     * Save the User settings
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function saveSettings(Request $request)
+    {
+        //
     }
 }
