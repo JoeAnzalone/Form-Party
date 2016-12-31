@@ -53,7 +53,10 @@
                         <!-- Authentication Links -->
                         @if (Auth::guest())
                             <li {!! Route::is('login') ? 'class="active"' : '' !!}><a href="{{ url('/login') }}">Login</a></li>
-                            <li {!! Route::is('register') ? 'class="active"' : '' !!}><a href="{{ url('/register') }}">Register</a></li>
+
+                            @if (!config('app.invite_only'))
+                                <li {!! Route::is('register') ? 'class="active"' : '' !!}><a href="{{ url('/register') }}">Register</a></li>
+                            @endif
                         @else
                             <li {!! Route::is('inbox') ? 'class="active"' : '' !!}><a href="{{ route('inbox') }}">Inbox
                             @if (Auth::user()->unanswered_message_count) <span class="badge">{{ Auth::user()->unanswered_message_count }}</span> @endif
