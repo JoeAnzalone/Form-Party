@@ -69,11 +69,17 @@ class UserController extends Controller
      */
     public function saveSettings(Request $request)
     {
+        $user = \Auth::user();
+
         $rules = User::$rules;
-        $rules['email'] = $rules['email'] . ',' . \Auth::user()->id;
-        $rules['username'] = $rules['username'] . ',' . \Auth::user()->id;
+        $rules['email'] = $rules['email'] . ',' . $user->id;
+        $rules['username'] = $rules['username'] . ',' . $user->id;
+        unset($rules['password']);
 
         Validator::make($request->all(), $rules)->validate();
 
+        $user->fill($request->all())->save();
+
+        return redirect()->route('settings')->with('success', '💾 Saved!');
     }
 }
