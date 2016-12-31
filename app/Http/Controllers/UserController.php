@@ -71,7 +71,7 @@ class UserController extends Controller
     {
         $user = \Auth::user();
 
-        $rules = User::$rules;
+        $rules = User::validationRules();
         $rules['email'] = $rules['email'] . ',' . $user->id;
         $rules['username'] = $rules['username'] . ',' . $user->id;
         unset($rules['password']);

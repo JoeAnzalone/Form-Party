@@ -9,6 +9,9 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    const ROLE_ID_NONE = 0;
+    const ROLE_ID_ADMIN = 1;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -30,13 +33,20 @@ class User extends Authenticatable
     /**
      * The validation rules for this model
      *
-     * @var array
+     * @return array
      */
-    public static $rules = [
-        'username' => 'required|alpha_num|min:4|max:32|unique:users,username',
-        'email' => 'required|email|max:255|unique:users,email',
-        'password' => 'required|min:6|confirmed',
-    ];
+    public static function validationRules()
+    {
+        $min_str = !\Auth::user()->is_admin ? 'min:4|' : '';
+
+        $rules = [
+            'username' => 'required|alpha_num|' . $min_str . 'max:32|unique:users,username',
+            'email' => 'required|email|max:255|unique:users,email',
+            'password' => 'required|min:6|confirmed',
+        ];
+
+        return $rules;
+    }
 
     public function messages()
     {
@@ -84,6 +94,11 @@ class User extends Authenticatable
     public function getWebsiteWithoutProtocolAttribute()
     {
         return str_replace(['http://','https://'], '', $this->website);
+    }
+
+    public function getisAdminAttribute()
+    {
+        return $this->role_id === self::ROLE_ID_ADMIN;
     }
 
     public function avatar($size = 80)
