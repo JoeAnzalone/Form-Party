@@ -27,6 +27,17 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * The validation rules for this model
+     *
+     * @var array
+     */
+    public static $rules = [
+        'username' => 'required|alpha_num|min:4|max:32|unique:users,username',
+        'email' => 'required|email|max:255|unique:users,email',
+        'password' => 'required|min:6|confirmed',
+    ];
+
     public function messages()
     {
         return $this->hasMany('App\Message');
