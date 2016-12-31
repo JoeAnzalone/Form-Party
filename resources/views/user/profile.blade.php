@@ -13,6 +13,7 @@
                         @if ($user->website) <span class="separator">❥</span> <a class="user-website" target="_blank" href="{{ $user->website }}">{{ $user->website_without_protocol }}</a> @endif
                         <div class="user-joined">Partying since {{ $user->created_at->format('F Y') }}</div>
                         <div class="user-bio">{!! nl2br(e($user->bio)) !!}</div>
+                        @if ($user->is(Auth::user())) <a class="edit-user" href="{{ route('settings') }}">Edit profile</a> @endif
                     </div>
                 </div>
             </div>

@@ -28,6 +28,7 @@
 
 .user-info {
     margin-left: 115px;
+    position: relative;
 }
 
 .user-avatar {
@@ -47,4 +48,10 @@
 
 .user-bio {
     margin: 10px 0;
+}
+
+.edit-user {
+    position: absolute;
+    top: 0;
+    right: 0;
 }
