@@ -26,8 +26,9 @@
     text-align: center;
 }
 
+
+
 .user-info {
-    margin-left: 115px;
     position: relative;
 }
 
@@ -51,7 +52,14 @@
 }
 
 .edit-user {
-    position: absolute;
-    top: 0;
-    right: 0;
+    display: block;
+}
+
+@media screen and (min-width: 500px) {
+    .edit-user {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 10px;
+    }
 }
