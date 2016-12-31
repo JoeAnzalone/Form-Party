@@ -55,6 +55,18 @@
                                         @endif
                                     </div>
                                 </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Avatar</label>
+                                    <div class="col-md-6">
+                                        <div class="media-left">
+                                            <a target="_blank" href="{{ $user->gravatar_profile_url }}"><img class="user-avatar" src="{{ $user->avatar(200) }}" width="100" title="Your avatar" alt="Your avatar"></a>
+                                        </div>
+                                        <div class="media-body">
+                                            <p>Change your avatar at <a rel="external" target="_blank" href="https://www.gravatar.com">Gravatar.com</a></p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 

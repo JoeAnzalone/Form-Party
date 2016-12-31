@@ -101,17 +101,26 @@ class User extends Authenticatable
         return $this->role_id === self::ROLE_ID_ADMIN;
     }
 
-    public function avatar($size = 80)
+    private function getEmailHash()
     {
         $email = trim($this->email);
         $email = strtolower($email);
-        $hash = md5($email);
+        return md5($email);
+    }
+
+    public function avatar($size = 80)
+    {
 
         $query_string = http_build_query([
             'd' => 'monsterid',
             's' => $size,
         ]);
 
-        return 'https://www.gravatar.com/avatar/' . $hash . '?' . $query_string;
+        return 'https://www.gravatar.com/avatar/' . $this->getEmailHash() . '?' . $query_string;
+    }
+
+    public function getGravatarProfileUrlAttribute()
+    {
+        return 'https://www.gravatar.com/' . $this->getEmailHash();
     }
 }

@@ -1,3 +1,7 @@
+[rel="external"]:after {
+    content: '\00a0↗️';
+}
+
 .full-height {
     height: calc(100vh - 150px);
 }
