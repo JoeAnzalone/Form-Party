@@ -18,6 +18,8 @@
 
                     <p>You're looking at the internet's hottest new anonymous question and answer site. Folks from all over the tri-state area gather here👇 to share secrets, confess their love, or just talk smack to their e-pals. 💌</p>
 
+                    <p>It's like a party, with forms!</p>
+
                     <p>Form Party is currently invite-only and in beta, but anyone can send messages to current members (that's the whole point!)</p>
 
                     <p>If you're interested in setting up a form for yourself, you can try asking <a href="{{ route('profile', 'joe') }}">Joe</a>. (nicely)</p>
