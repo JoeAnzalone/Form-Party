@@ -12,6 +12,10 @@
     justify-content: center;
 }
 
+.panel-body *:first-child {
+    margin-top: 0;
+}
+
 .title {
     font-size: 84px;
     font-weight: 100;
