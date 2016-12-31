@@ -34,6 +34,14 @@
     text-align: center;
 }
 
+.pagination-wrapper {
+    text-align: center;
+}
+
+.pagination {
+    margin: 0;
+}
+
 .user-info {
     position: relative;
 }

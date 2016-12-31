@@ -46,6 +46,10 @@
                     @else
                         <p>{{ $user->username }} doesn't have any messages yet. Why not make their day by <a href="#" data-js-focus-message-box>sending one</a>? 👆</p>
                     @endif
+
+                    <div class="pagination-wrapper">
+                        {{ $messages->links() }}
+                    </div>
                 </div>
             </div>
         </div>
