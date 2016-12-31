@@ -17,7 +17,7 @@
                         <div class="user-bio">{!! nl2br(e($user->bio)) !!}</div>
                     </div>
 
-                    @if ($user->is(Auth::user())) <a class="edit-user text-center" href="{{ route('settings') }}">Edit profile</a> @endif
+                    @if (Auth::user() && $user->is(Auth::user())) <a class="edit-user text-center" href="{{ route('settings') }}">Edit profile</a> @endif
                 </div>
             </div>
         </div>
