@@ -1,10 +1,14 @@
 @foreach ($messages as $message)
-<div class="panel panel-default message {{ $message['answer'] ? 'has-answer' : '' }}">
+<div class="panel panel-default message {{ $message->answer ? 'has-answer' : 'no-answer' }}">
     <div class="panel-body">
-        <blockquote>{!! nl2br(e($message['body'])) !!}</blockquote>
-        {{ $message['answer'] }}
+        <blockquote class="message-body">{!! nl2br(e($message->body)) !!}</blockquote>
+
+        @if ($message->answer)
+            <div class="message-answer">{{ $message->answer }}</div>
+        @endif
+
         @can('answer', $message)
-            <a href="{{ route('message.answer', $message) }}">{{ $message['answer'] ? 'Edit ' : '' }}Answer</a>
+            <a class="answer-message-link" href="{{ route('message.answer', $message) }}">{{ $message->answer ? 'Edit ' : '' }}Answer</a>
         @endcan
     </div>
 </div>

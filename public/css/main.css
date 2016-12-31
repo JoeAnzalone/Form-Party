@@ -65,3 +65,13 @@
         padding: 10px;
     }
 }
+
+.message-body,
+.message-answer {
+    margin-bottom: 15px;
+}
+
+.message-body:last-child,
+.message-answer:last-child {
+    margin-bottom: 0;
+}
