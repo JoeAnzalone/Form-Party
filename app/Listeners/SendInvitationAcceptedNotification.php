@@ -2,9 +2,11 @@
 
 namespace App\Listeners;
 
-use App\Events\InvitationAccepted;
+use App\Events\InvitationAccepted as InviteAcceptedEvent;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+
+use App\Notifications\InvitationAccepted as InviteAcceptedNotification;
 
 class SendInvitationAcceptedNotification
 {
@@ -21,11 +23,12 @@ class SendInvitationAcceptedNotification
     /**
      * Handle the event.
      *
-     * @param  InvitationAccepted  $event
+     * @param  InviteAcceptedEvent  $event
      * @return void
      */
-    public function handle(InvitationAccepted $event)
+    public function handle(InviteAcceptedEvent $event)
     {
-        //
+        $invite = $event->invite;
+        $invite->user->notify(new InviteAcceptedNotification($invite));
     }
 }

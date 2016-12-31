@@ -7,6 +7,8 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
+use App\Invite;
+
 class InvitationAccepted extends Notification
 {
     use Queueable;
@@ -16,9 +18,9 @@ class InvitationAccepted extends Notification
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Invite $invite)
     {
-        //
+        $this->invite = $invite;
     }
 
     /**
@@ -41,9 +43,8 @@ class InvitationAccepted extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', 'https://laravel.com')
-                    ->line('Thank you for using our application!');
+                    ->line(sprintf('Your invite was accepted by %s!', $this->invite->claimed_by->username))
+                    ->action(sprintf('Welcome %s with a new message', $this->invite->claimed_by->username), route('profile', $this->invite->claimed_by->username));
     }
 
     /**

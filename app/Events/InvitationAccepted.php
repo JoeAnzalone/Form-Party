@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Invite;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -13,14 +14,16 @@ class InvitationAccepted
 {
     use InteractsWithSockets, SerializesModels;
 
+    public $invite;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Invite $invite)
     {
-        //
+        $this->invite = $invite;
     }
 
     /**
