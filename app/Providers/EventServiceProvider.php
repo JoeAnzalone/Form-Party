@@ -34,5 +34,13 @@ class EventServiceProvider extends ServiceProvider
          \App\Message::created(function($message) {
             event(new \App\Events\MessageSent($message));
         });
+
+         \App\Invite::updated(function($invite) {
+            $original = $invite->getOriginal();
+
+            if (is_null($original['claimed_by_id']) && !empty($invite->claimed_by_id)) {
+                event(new \App\Events\InvitationAccepted($invite));
+            }
+        });
     }
 }
