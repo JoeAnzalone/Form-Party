@@ -95,6 +95,6 @@ class UserController extends Controller
 
         $user->fill($request->all())->save();
 
-        return redirect()->route('settings')->with('success', '💾 Saved!');
+        return redirect()->route('profile', $user->username)->with('success', '💾 Saved!');
     }
 }
