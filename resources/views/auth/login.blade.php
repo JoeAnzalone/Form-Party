@@ -20,9 +20,15 @@
 
                     <p>It's like a party, with forms!</p>
 
-                    <p>Form Party is currently invite-only and in beta, but anyone can send messages to current members (that's the whole point!)</p>
+                    @if (config('app.invite_only'))
+                        <p>Form Party is currently invite-only and in beta, but anyone can send messages to current members (that's the whole point!)</p>
 
-                    <p>If you're interested in setting up a form for yourself, you can try asking <a href="{{ route('profile', 'joe') }}">Joe</a>. (nicely)</p>
+                        <p>If you're interested in setting up a form for yourself, you can try asking <a href="{{ route('profile', 'joe') }}">Joe</a>. (nicely)</p>
+                    @else
+                        <div class="text-center">
+                            <a class="btn btn-primary btn-lg" href="{{ route('register') }}">Join the party 💃</a>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
