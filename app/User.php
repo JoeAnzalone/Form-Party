@@ -37,7 +37,8 @@ class User extends Authenticatable
      */
     public static function validationRules()
     {
-        $min_str = !\Auth::user()->is_admin ? 'min:4|' : '';
+        $user = \Auth::user();
+        $min_str = !($user && $user->is_admin) ? 'min:4|' : '';
 
         $rules = [
             'username' => 'required|alpha_num|' . $min_str . 'max:32|unique:users,username',
