@@ -71,21 +71,21 @@
             </div>
         </nav>
 
-        @if (!empty(\Session::get('success')))
+        @if (!empty(\Session::get('success')) || !empty($success))
             <div class="alert alert-success">
-            {!! \Session::get('success') !!}
+            {!! \Session::get('success') ?: $success !!}
             </div>
         @endif
 
-        @if (!empty(\Session::get('info')))
+        @if (!empty(\Session::get('info')) || !empty($info))
             <div class="alert alert-info">
-            {!! \Session::get('info') !!}
+            {!! \Session::get('info') ?: $info !!}
             </div>
         @endif
 
-        @if (!empty(\Session::get('error')))
+        @if (!empty(\Session::get('error')) || !empty($error))
             <div class="alert alert-danger">
-            {!! \Session::get('error') !!}
+            {!! \Session::get('error') ?: $error !!}
             </div>
         @endif
 
