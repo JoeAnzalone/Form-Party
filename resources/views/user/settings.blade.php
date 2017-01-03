@@ -71,9 +71,11 @@
                         </div>
 
                         <div class="panel panel-default">
-                            <div class="panel-heading text-center">Account</div>
+                            <div class="panel-heading text-center">
+                                <a href="{{ url('/logout') }}" class="logout-link">Logout</a>
+                                Account
+                            </div>
                             <div class="panel-body">
-
                                 <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                                     <label for="username" class="col-md-4 control-label">Username</label>
 

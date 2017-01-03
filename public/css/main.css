@@ -12,6 +12,10 @@
     justify-content: center;
 }
 
+.panel-heading {
+    position: relative;
+}
+
 .panel-body *:first-child {
     margin-top: 0;
 }
@@ -86,4 +90,10 @@
 .message-body:last-child,
 .message-answer:last-child {
     margin-bottom: 0;
+}
+
+.logout-link {
+    position: absolute;
+    left: 0;
+    padding-left: 15px;
 }

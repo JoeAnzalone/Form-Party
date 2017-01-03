@@ -92,7 +92,12 @@
         @yield('content')
     </div>
 
+    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+        {{ csrf_field() }}
+    </form>
+
     <!-- Scripts -->
     <script src="/js/app.js"></script>
+    <script src="/js/main.js"></script>
 </body>
 </html>
