@@ -4,7 +4,7 @@
         <blockquote class="message-body">{!! nl2br(e($message->body)) !!}</blockquote>
 
         @if ($message->answer)
-            <div class="message-answer">{{ $message->answer }}</div>
+            <div class="message-answer">{!! nl2br(e($message->answer)) !!}</div>
         @endif
 
         @can('answer', $message)
