@@ -12,7 +12,7 @@
                     </div>
                     <div class="media-body">
                         <h3 class="user-username">{{ $user->username }}</h3>
-                        @if ($user->website) <span class="separator">❥</span> <a class="user-website" target="_blank" href="{{ $user->website }}">{{ $user->website_without_protocol }}</a> @endif
+                        @if ($user->website) <span class="separator">❥</span> <a class="user-website" target="_blank" href="{{ $user->website }}">{{ $user->short_website }}</a> @endif
                         <div class="user-joined">Partying since {{ $user->created_at->format('F Y') }}</div>
                         <div class="user-bio">{!! nl2br(e($user->bio)) !!}</div>
                     </div>

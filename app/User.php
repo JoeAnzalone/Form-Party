@@ -92,9 +92,21 @@ class User extends Authenticatable
         $this->attributes['website'] = $url;
     }
 
-    public function getWebsiteWithoutProtocolAttribute()
+    public function getShortWebsiteAttribute()
     {
-        return str_replace(['http://','https://'], '', $this->website);
+        $url = $this->website;
+
+        if (starts_with($url, 'http://')) {
+            $url = substr($url, 7);
+        } elseif (starts_with($url, 'https://')) {
+            $url = substr($url, 8);
+        }
+
+        if (starts_with($url, 'www.')) {
+            $url = substr($url, 4);
+        }
+
+        return $url;
     }
 
     public function getisAdminAttribute()
