@@ -74,7 +74,7 @@ class UserController extends Controller
     {
         $user = \Auth::user();
 
-        return view('user.settings', ['title' =>  'Settings', 'user' => $user]);
+        return view('user.settings', ['title' =>  'Settings', 'user' => $user, 'page' => 'settings']);
     }
 
     /**
@@ -92,15 +92,27 @@ class UserController extends Controller
 
         $user_params = $request->all();
 
-        if (empty($user_params['password']) && empty($user_params['password-confirm'])) {
+        $change_password = (!empty($user_params['password']) || !empty($user_params['password-confirm']));
+        $change_email = ($user_params['email'] !== $user->email);
+
+        if (!$change_password) {
             unset($rules['password']);
+            unset($user_params['password']);
         }
 
-        Validator::make($user_params, $rules)->validate();
+        $validator = Validator::make($user_params, $rules)->validate();
 
-        $user_params['password'] = bcrypt($user_params['password']);
+        if ($change_password || $change_email) {
+            if (!\Hash::check($user_params['current-password'], $user->password)) {
+                return redirect()->route('settings')->with('error', 'Wrong password, bucko');
+            }
+        }
 
-        $user->fill($user_params)->save();
+        if ($change_password) {
+            $user_params['password'] = bcrypt($user_params['password']);
+        }
+
+        $user->update($user_params);
 
         return redirect()->route('profile', $user->username)->with('success', 'Saved! 💾');
     }

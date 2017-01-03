@@ -27,7 +27,7 @@
         ]); ?>
     </script>
 </head>
-<body>
+<body data-page="{{ $page or 'default' }}">
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
@@ -84,7 +84,7 @@
         @endif
 
         @if (!empty(\Session::get('error')))
-            <div class="alert alert-error">
+            <div class="alert alert-danger">
             {!! \Session::get('error') !!}
             </div>
         @endif
