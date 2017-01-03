@@ -89,12 +89,19 @@ class UserController extends Controller
         $rules = User::validationRules();
         $rules['email'] = $rules['email'] . ',' . $user->id;
         $rules['username'] = $rules['username'] . ',' . $user->id;
-        unset($rules['password']);
 
-        Validator::make($request->all(), $rules)->validate();
+        $user_params = $request->all();
 
-        $user->fill($request->all())->save();
+        if (empty($user_params['password']) && empty($user_params['password-confirm'])) {
+            unset($rules['password']);
+        }
 
-        return redirect()->route('profile', $user->username)->with('success', '💾 Saved!');
+        Validator::make($user_params, $rules)->validate();
+
+        $user_params['password'] = bcrypt($user_params['password']);
+
+        $user->fill($user_params)->save();
+
+        return redirect()->route('profile', $user->username)->with('success', 'Saved! 💾');
     }
 }
