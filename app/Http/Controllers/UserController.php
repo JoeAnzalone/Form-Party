@@ -24,9 +24,8 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function profile(string $username)
+    public function profile(User $user)
     {
-        $user = User::where('username', $username)->firstOrFail();
         $messages = $user->messages()->where('status_id', Message::STATUS_ANSWERED_PUBLICLY)->orderBy('updated_at', 'desc')->paginate(10);
 
         $title = sprintf('%s Form Party', title_case($user->username_possessive));

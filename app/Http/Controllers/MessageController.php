@@ -57,9 +57,8 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function answerForm(int $message_id)
+    public function answerForm(Message $message)
     {
-        $message = \App\Message::find($message_id);
         $this->authorize('answer', $message);
 
         return view('message.answer_form', ['message' => $message]);
@@ -70,9 +69,8 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function answer(int $message_id, Request $request)
+    public function answer(Message $message, Request $request)
     {
-        $message = Message::find($message_id);
         $this->authorize('answer', $message);
 
         $answer = $request->input('answer');
