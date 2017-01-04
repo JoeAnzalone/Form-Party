@@ -99,5 +99,9 @@
     <!-- Scripts -->
     <script src="/js/app.js"></script>
     <script src="/js/main.js"></script>
+
+    @if (View::exists('analytics'))
+        @include('analytics')
+    @endif
 </body>
 </html>
