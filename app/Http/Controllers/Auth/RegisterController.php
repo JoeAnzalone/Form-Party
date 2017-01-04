@@ -88,6 +88,7 @@ class RegisterController extends Controller
      {
         $invite = $request->attributes->get('invite');
 
+        $alert = false;
         if ($invite) {
             $alert = sprintf(
                 '<a target="_blank" href="%s">%s</a> has invited you to check out %s!',
