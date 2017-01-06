@@ -95,7 +95,7 @@ class User extends Authenticatable
 
     public function setWebsiteAttribute(string $url)
     {
-        if (!starts_with($url, 'http://') && !starts_with($url, 'https://')) {
+        if (!empty($url) && !starts_with($url, 'http://') && !starts_with($url, 'https://')) {
             $url = 'http://' . $url;
         }
 
