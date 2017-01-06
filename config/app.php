@@ -199,8 +199,7 @@ return [
         /*
          * Package Service Providers...
          */
-
-        //
+        Sentry\SentryLaravel\SentryLaravelServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -259,6 +258,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        'Sentry' => Sentry\SentryLaravel\SentryFacade::class,
     ],
 
 ];
