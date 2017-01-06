@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'username', 'password', 'website', 'bio',
+        'name', 'email', 'username', 'password', 'website', 'bio', 'meta',
     ];
 
     /**
@@ -28,6 +28,20 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password', 'remember_token',
+    ];
+
+    /**
+     * The default meta field values
+     *
+     * @var array
+     */
+    public $defaults = [
+        'meta' => [
+            'notifications' => [
+                'new_message' => ['email' => true],
+                'invitation_accepted' => ['email' => true],
+            ],
+        ],
     ];
 
     /**
@@ -100,6 +114,18 @@ class User extends Authenticatable
         }
 
         $this->attributes['website'] = $url;
+    }
+
+    public function getMetaAttribute()
+    {
+        $meta = json_decode($this->attributes['meta'], true) ?: [];
+        return array_replace_recursive($this->defaults['meta'], $meta);
+    }
+
+    public function setMetaAttribute(array $meta)
+    {
+        $meta = array_replace_recursive($this->defaults['meta'], $meta);
+        $this->attributes['meta'] = json_encode($meta);
     }
 
     public function getShortWebsiteAttribute()

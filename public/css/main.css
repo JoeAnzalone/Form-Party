@@ -16,7 +16,7 @@
     position: relative;
 }
 
-.panel-body *:first-child {
+.panel-body > *:first-child {
     margin-top: 0;
 }
 

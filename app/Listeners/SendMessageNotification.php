@@ -29,6 +29,11 @@ class SendMessageNotification
     public function handle(MessageSent $event)
     {
         $message = $event->message;
+
+        if (!$message->recipient->meta['notifications']['new_message']['email']) {
+            return;
+        }
+
         $message->recipient->notify(new NewMessage($message));
     }
 }

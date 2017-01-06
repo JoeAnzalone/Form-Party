@@ -29,6 +29,11 @@ class SendInvitationAcceptedNotification
     public function handle(InviteAcceptedEvent $event)
     {
         $invite = $event->invite;
+
+        if (!$invite->user->meta['notifications']['invitation_accepted']['email']) {
+            return;
+        }
+
         $invite->user->notify(new InviteAcceptedNotification($invite));
     }
 }

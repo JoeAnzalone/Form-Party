@@ -150,6 +150,35 @@
                             </div>
                         </div>
 
+                        <div class="panel panel-default">
+                            <div class="panel-heading text-center">Notifications</div>
+                            <div class="panel-body">
+                                <p class="text-center">Email me when:</p>
+                                <div class="form-group{{ $errors->has('new_message_email') ? ' has-error' : '' }}">
+                                    <div class="col-xs-10 col-xs-offset-2 col-sm-offset-3 col-lg-offset-4">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="new_message_email" {{ $user->meta['notifications']['new_message']['email'] ? 'checked' : '' }} value="1">
+                                                Someone sends me a new message
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group{{ $errors->has('invitation_accepted_email') ? ' has-error' : '' }}">
+                                    <div class="col-xs-10 col-xs-offset-2 col-sm-offset-3 col-lg-offset-4">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="invitation_accepted_email" {{ $user->meta['notifications']['invitation_accepted']['email'] ? 'checked' : '' }} value="1">
+                                                Someone uses one of my invite codes
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">Save</button>

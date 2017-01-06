@@ -111,6 +111,13 @@ class UserController extends Controller
             $user_params['password'] = bcrypt($user_params['password']);
         }
 
+        $user_params['meta'] = [
+            'notifications' => [
+                'new_message' => ['email' => !empty($user_params['new_message_email'])],
+                'invitation_accepted' => ['email' => !empty($user_params['invitation_accepted_email'])],
+            ],
+        ];
+
         $user->update($user_params);
 
         return redirect()->route('profile', $user->username)->with('success', 'Saved! 💾');
