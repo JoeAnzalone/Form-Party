@@ -15,7 +15,7 @@ Auth::routes();
 
 Route::get('/', 'MessageController@inbox')->name('inbox');
 
-Route::get('inbox/archive', 'MessageController@archivedMessages');
+Route::get('inbox/archive', 'MessageController@viewArchive')->name('message.viewArchive');
 Route::group(['prefix' => 'messages'], function () {
     Route::post('/', 'MessageController@store');
     Route::get('{message}/answer', 'MessageController@answerForm')->name('message.answer');

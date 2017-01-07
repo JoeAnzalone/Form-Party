@@ -7,17 +7,19 @@
             <div class="message-answer">{!! nl2br(e($message->answer)) !!}</div>
         @endif
 
-        @can('answer', $message)
-            <a class="answer-message-link" href="{{ route('message.answer', $message) }}">{{ $message->answer ? 'Edit ' : '' }}Answer</a>
-        @endcan
+        <div class="controls pull-right">
+            @can('archive', $message)
+                @include('message.archive_button')
+            @endcan
 
-        @can('archive', $message)
-            @include('message.archive_button')
-        @endcan
+            @can('unarchive', $message)
+                @include('message.unarchive_button')
+            @endcan
 
-        @can('unarchive', $message)
-            @include('message.unarchive_button')
-        @endcan
+            @can('answer', $message)
+                <a class="answer-message-link btn btn-primary" href="{{ route('message.answer', $message) }}">{{ $message->answer ? 'Edit ' : '' }}Answer</a>
+            @endcan
+        </div>
     </div>
 </div>
 @endforeach

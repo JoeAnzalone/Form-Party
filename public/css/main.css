@@ -42,9 +42,8 @@
     display: inline-block;
 }
 
-.button-link {
-    padding: 0;
-    border: none;
+.inbox-nav {
+    margin-bottom: 15px;
 }
 
 .pagination-wrapper {

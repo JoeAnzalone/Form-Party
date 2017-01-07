@@ -58,7 +58,7 @@
                                 <li {!! Route::is('register') ? 'class="active"' : '' !!}><a href="{{ url('/register') }}">Register</a></li>
                             @endif
                         @else
-                            <li {!! Route::is('inbox') ? 'class="active"' : '' !!}><a href="{{ route('inbox') }}">Inbox
+                            <li {!! Route::is('inbox') || Route::is('message.viewArchive') ? 'class="active"' : '' !!}><a href="{{ route('inbox') }}">Inbox
                             @if (Auth::user()->unanswered_message_count) <span class="badge">{{ Auth::user()->unanswered_message_count }}</span> @endif
                             </a></li>
                             <li {!! !empty($user) && $user->username === Auth::user()->username && Route::is('profile') ? 'class="active"' : '' !!}><a href="{{ route('profile', Auth::user()->username) }}">{{ Auth::user()->username }}</a></li>

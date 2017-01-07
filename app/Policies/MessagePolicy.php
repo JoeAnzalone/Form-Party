@@ -54,7 +54,11 @@ class MessagePolicy
      */
     public function answer(User $user, Message $message)
     {
-        return $user->is($message->recipient) && !$message->trashed();
+        return (
+            $user->is($message->recipient) &&
+            !$message->trashed() &&
+            in_array($message->status_id, [Message::STATUS_UNANSWERED, Message::STATUS_ANSWERED_PUBLICLY])
+        );
     }
 
     /**

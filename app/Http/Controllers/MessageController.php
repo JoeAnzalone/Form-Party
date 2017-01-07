@@ -37,7 +37,7 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function archivedMessages()
+    public function viewArchive()
     {
         $user = Auth::user();
         $messages = $user->messages()->where('status_id', Message::STATUS_ARCHIVED)->orderBy('created_at', 'desc')->paginate(10);
