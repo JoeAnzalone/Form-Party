@@ -200,6 +200,7 @@ return [
          * Package Service Providers...
          */
         Sentry\SentryLaravel\SentryLaravelServiceProvider::class,
+        Spatie\Backup\BackupServiceProvider::class,
 
         /*
          * Application Service Providers...
