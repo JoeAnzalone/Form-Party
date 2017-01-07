@@ -55,6 +55,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Administrator Email
+    |--------------------------------------------------------------------------
+    |
+    | This email address is used for admin-level notifications such as
+    | the status of automatic backups.
+    |
+    */
+
+    'admin_email' => env('APP_ADMIN_EMAIL', 'formparty@example.com'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Force SSL
     |--------------------------------------------------------------------------
     |
