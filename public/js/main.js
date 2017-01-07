@@ -8,6 +8,18 @@ document.querySelectorAll('.logout-link').forEach(function(el) {
     });
 });
 
+document.querySelectorAll('button.delete').forEach(function(el) {
+    el.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        if (window.confirm('Are you sure you want to delete this message?')) {
+            el.form.submit();
+        }
+
+        return false;
+    });
+});
+
 if (document.body.dataset.page == 'settings') {
     document.querySelectorAll('[data-requires-password-if-changed]').forEach(function(el) {
         // If the input field requires the current password to be entered before updating,

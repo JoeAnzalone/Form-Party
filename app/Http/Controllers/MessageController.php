@@ -136,6 +136,6 @@ class MessageController extends Controller
 
         $message->delete();
 
-        return redirect()->route('inbox')->with('info', 'Message deleted! 🗑');
+        return back()->with('info', 'Message deleted! 🗑');
     }
 }
