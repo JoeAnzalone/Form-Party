@@ -102,6 +102,10 @@ class MessagePolicy
      */
     public function delete(User $user, Message $message)
     {
-        //
+        return (
+            $user->is($message->recipient) &&
+            !$message->trashed() &&
+            in_array($message->status_id, [Message::STATUS_ARCHIVED, Message::STATUS_ANSWERED_PUBLICLY])
+        );
     }
 }

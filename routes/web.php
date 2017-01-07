@@ -19,10 +19,10 @@ Route::get('inbox/archive', 'MessageController@viewArchive')->name('message.view
 Route::group(['prefix' => 'messages'], function () {
     Route::post('/', 'MessageController@store');
     Route::get('{message}/answer', 'MessageController@answerForm')->name('message.answer');
+    Route::put('{message}/answer', 'MessageController@answer');
     Route::put('{message}/archive', 'MessageController@archive')->name('message.archive');
     Route::put('{message}/unarchive', 'MessageController@unarchive')->name('message.unarchive');
     Route::delete('{message}', 'MessageController@delete')->name('message.delete');
-    Route::put('{message}/answer', 'MessageController@answer');
 });
 
 Route::get('/invite', 'UserController@listInvites')->name('invite');

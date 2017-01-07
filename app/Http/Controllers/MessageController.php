@@ -124,4 +124,18 @@ class MessageController extends Controller
 
         return redirect()->route('inbox')->with('info', 'Message restored! 📬');
     }
+
+    /**
+     * Delete the message
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function delete(Message $message)
+    {
+        $this->authorize('delete', $message);
+
+        $message->delete();
+
+        return redirect()->route('inbox')->with('info', 'Message deleted! 🗑');
+    }
 }

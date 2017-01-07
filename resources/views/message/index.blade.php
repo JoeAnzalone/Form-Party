@@ -16,6 +16,10 @@
                 @include('message.unarchive_button')
             @endcan
 
+            @can('delete', $message)
+                @include('message.delete_button')
+            @endcan
+
             @can('answer', $message)
                 <a class="answer-message-link btn btn-primary" href="{{ route('message.answer', $message) }}">{{ $message->answer ? 'Edit ' : '' }}Answer</a>
             @endcan
