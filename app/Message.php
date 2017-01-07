@@ -10,6 +10,15 @@ class Message extends Model
     use SoftDeletes;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'status_id',
+    ];
+
+    /**
      * The attributes that should be mutated to dates.
      *
      * @var array
@@ -18,6 +27,7 @@ class Message extends Model
 
     const STATUS_UNANSWERED = 0;
     const STATUS_ANSWERED_PUBLICLY = 1;
+    const STATUS_ARCHIVED = 2;
 
     protected function getStatusAttribute()
     {

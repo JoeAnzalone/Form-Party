@@ -58,6 +58,38 @@ class MessagePolicy
     }
 
     /**
+     * Determine whether the user can archive the message.
+     *
+     * @param  \App\User  $user
+     * @param  \App\Message  $message
+     * @return mixed
+     */
+    public function archive(User $user, Message $message)
+    {
+        return (
+            $user->is($message->recipient) &&
+            !$message->trashed() &&
+            $message->status_id === Message::STATUS_UNANSWERED
+        );
+    }
+
+    /**
+     * Determine whether the user can un-archive the message.
+     *
+     * @param  \App\User  $user
+     * @param  \App\Message  $message
+     * @return mixed
+     */
+    public function unarchive(User $user, Message $message)
+    {
+        return (
+            $user->is($message->recipient) &&
+            !$message->trashed() &&
+            $message->status_id === Message::STATUS_ARCHIVED
+        );
+    }
+
+    /**
      * Determine whether the user can delete the message.
      *
      * @param  \App\User  $user

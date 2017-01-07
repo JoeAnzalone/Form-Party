@@ -38,6 +38,15 @@
     text-align: center;
 }
 
+.button-form {
+    display: inline-block;
+}
+
+.button-link {
+    padding: 0;
+    border: none;
+}
+
 .pagination-wrapper {
     text-align: center;
 }

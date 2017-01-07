@@ -10,6 +10,14 @@
         @can('answer', $message)
             <a class="answer-message-link" href="{{ route('message.answer', $message) }}">{{ $message->answer ? 'Edit ' : '' }}Answer</a>
         @endcan
+
+        @can('archive', $message)
+            @include('message.archive_button')
+        @endcan
+
+        @can('unarchive', $message)
+            @include('message.unarchive_button')
+        @endcan
     </div>
 </div>
 @endforeach

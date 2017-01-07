@@ -15,9 +15,15 @@ Auth::routes();
 
 Route::get('/', 'MessageController@inbox')->name('inbox');
 
-Route::post('/messages', 'MessageController@store');
-Route::get('/messages/{message}/answer', 'MessageController@answerForm')->name('message.answer');
-Route::put('/messages/{message}/answer', 'MessageController@answer');
+Route::get('inbox/archive', 'MessageController@archivedMessages');
+Route::group(['prefix' => 'messages'], function () {
+    Route::post('/', 'MessageController@store');
+    Route::get('{message}/answer', 'MessageController@answerForm')->name('message.answer');
+    Route::put('{message}/archive', 'MessageController@archive')->name('message.archive');
+    Route::put('{message}/unarchive', 'MessageController@unarchive')->name('message.unarchive');
+    Route::delete('{message}', 'MessageController@delete')->name('message.delete');
+    Route::put('{message}/answer', 'MessageController@answer');
+});
 
 Route::get('/invite', 'UserController@listInvites')->name('invite');
 

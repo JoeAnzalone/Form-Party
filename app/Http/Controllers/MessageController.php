@@ -33,6 +33,19 @@ class MessageController extends Controller
     }
 
     /**
+     * Show the user's archived messages
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function archivedMessages()
+    {
+        $user = Auth::user();
+        $messages = $user->messages()->where('status_id', Message::STATUS_ARCHIVED)->orderBy('created_at', 'desc')->paginate(10);
+
+        return view('message.inbox', ['title' =>  'Message Archive', 'messages' => $messages]);
+    }
+
+    /**
      * Store the message
      *
      * @return \Illuminate\Http\Response
@@ -79,5 +92,36 @@ class MessageController extends Controller
         $message->save();
 
         return redirect($message->recipient->username)->with('success', 'Answer published! 😃');
+    }
+
+    /**
+     * Archive the message
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function archive(Message $message)
+    {
+        $this->authorize('archive', $message);
+
+        $message->update(['status_id' => Message::STATUS_ARCHIVED]);
+
+        return redirect()->route('inbox')->with(
+            'info',
+            sprintf('Message archived! 🗄 <br> %s', view('message.unarchive_button', ['message' => $message]))
+        );
+    }
+
+    /**
+     * Un-archive the message
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function unarchive(Message $message)
+    {
+        $this->authorize('unarchive', $message);
+
+        $message->update(['status_id' => Message::STATUS_UNANSWERED]);
+
+        return redirect()->route('inbox')->with('info', 'Message restored! 📬');
     }
 }
