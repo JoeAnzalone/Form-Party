@@ -34,13 +34,4 @@
     </div>
 </div>
 
-<script type="text/JavaScript">
-    document.querySelectorAll('.invite-codes .unclaimed').forEach(function(el) {
-        el.addEventListener('click', function(e) {
-            e.preventDefault();
-            prompt('Send this special URL to a special friend! ♥️', el.href);
-            return false;
-        });
-    });
-</script>
 @endsection

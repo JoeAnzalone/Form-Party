@@ -61,7 +61,7 @@ class UserController extends Controller
         }
 
         $invites = $user->invites;
-        return view('user.invites', ['title' =>  'Invite', 'invites' => $invites]);
+        return view('user.invites', ['title' =>  'Invite', 'page' => 'invite', 'invites' => $invites]);
     }
 
     /**
