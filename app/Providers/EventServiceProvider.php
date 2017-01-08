@@ -16,6 +16,7 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\UserCreated' => ['App\Listeners\SendWelcomeMessage', 'App\Listeners\GiveInvites'],
         'App\Events\InvitationAccepted' => ['App\Listeners\SendInvitationAcceptedNotification'],
         'App\Events\MessageSent' => ['App\Listeners\SendMessageNotification',],
+        'App\Events\FollowCreated' => ['App\Listeners\SendNewFollowerNotification',],
     ];
 
     /**
