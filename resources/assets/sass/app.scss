@@ -50,6 +50,14 @@
 
 .button-form {
     display: inline-block;
+
+    &.button-form-wide {
+        display: block;
+
+        button {
+            width: 100%;
+        }
+    }
 }
 
 .inbox-nav {
@@ -72,6 +80,7 @@
     width: 100px;
     height: 100px;
     float: left;
+    margin-bottom: 5px;
 }
 
 .user-username {

@@ -9,13 +9,6 @@
                 <div class="panel-body media user-info">
                     <div class="media-left">
                         <img class="user-avatar" src="{{ $user->avatar(200) }}" width="100" title="{{ $user->username_possessive }} avatar" alt="{{ $user->username_possessive }} avatar">
-                    </div>
-                    <div class="media-body">
-                        <h3 class="user-username">{{ $user->username }}</h3>
-                        @if ($user->website) <span class="separator">❥</span> <a class="user-website" target="_blank" href="{{ $user->website }}">{{ $user->short_website }}</a> @endif
-                        <div class="user-joined">Partying since {{ $user->created_at->format('F Y') }}</div>
-                        <div class="user-bio">{!! nl2br(e($user->bio)) !!}</div>
-
                         @can('follow', $user)
                             @include('user.follow_button')
                         @endcan
@@ -23,6 +16,12 @@
                         @can('unfollow', $user)
                             @include('user.unfollow_button')
                         @endcan
+                    </div>
+                    <div class="media-body">
+                        <h3 class="user-username">{{ $user->username }}</h3>
+                        @if ($user->website) <span class="separator">❥</span> <a class="user-website" target="_blank" href="{{ $user->website }}">{{ $user->short_website }}</a> @endif
+                        <div class="user-joined">Partying since {{ $user->created_at->format('F Y') }}</div>
+                        <div class="user-bio">{!! nl2br(e($user->bio)) !!}</div>
                     </div>
 
                     @if (Auth::user() && $user->is(Auth::user())) <a class="edit-user text-center" href="{{ route('settings') }}">Edit profile</a> @endif
