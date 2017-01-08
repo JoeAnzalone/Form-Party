@@ -195,7 +195,7 @@ class User extends Authenticatable
         return 'https://www.gravatar.com/avatar/' . $this->getEmailHash() . '?' . $query_string;
     }
 
-    public function avatarImg($size = 80, $imgSize = null)
+    public function avatarImg($size = 80, $imgSize = null, $hyperlink = true)
     {
         $imgSize = $imgSize ?: $size;
 
@@ -207,7 +207,11 @@ class User extends Authenticatable
             e($this->username_possessive)
         );
 
-        return sprintf('<a href="%s">%s</a>', $this->url, $img);
+        if ($hyperlink) {
+            return sprintf('<a href="%s">%s</a>', $this->url, $img);
+        }
+
+        return $img;
     }
 
     public function getUrlAttribute()
