@@ -173,13 +173,16 @@ class UserController extends Controller
             $user_params['password'] = bcrypt($user_params['password']);
         }
 
-        $user_params['meta'] = [
-            'notifications' => [
-                'new_message' => ['email' => !empty($user_params['new_message_email'])],
-                'new_follower' => ['email' => !empty($user_params['new_follower_email'])],
-                'invitation_accepted' => ['email' => !empty($user_params['invitation_accepted_email'])],
-            ],
+
+        $meta = $user->meta;
+
+        $meta['notifications'] = [
+            'new_message' => ['email' => !empty($user_params['new_message_email'])],
+            'new_follower' => ['email' => !empty($user_params['new_follower_email'])],
+            'invitation_accepted' => ['email' => !empty($user_params['invitation_accepted_email'])],
         ];
+
+        $user_params['meta'] = $meta;
 
         $user->update($user_params);
 

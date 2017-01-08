@@ -105,4 +105,15 @@ class UserPolicy
             $authedUser->following()->where(['followed_id' => $user->id])->count()
         );
     }
+
+    /**
+     * Determine whether the user can sidestep the minimum username length
+     *
+     * @param  \App\User  $authedUser
+     * @return mixed
+     */
+    public function shortUsername(User $authedUser)
+    {
+        return $authedUser->meta['permissions']['short_username'];
+    }
 }

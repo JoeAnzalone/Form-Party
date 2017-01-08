@@ -42,6 +42,9 @@ class User extends Authenticatable
                 'new_follower' => ['email' => true],
                 'invitation_accepted' => ['email' => true],
             ],
+            'permissions' => [
+                'short_username' => false,
+            ],
         ],
     ];
 
@@ -63,7 +66,7 @@ class User extends Authenticatable
     public static function validationRules()
     {
         $user = \Auth::user();
-        $min_str = !($user && $user->is_admin) ? 'min:4|' : '';
+        $min_str = !($user && $user->can('shortUsername', User::class)) ? 'min:4|' : '';
 
         $rules = [
             'username' => 'required|alpha_num|' . $min_str . 'max:32|unique:users,username',
@@ -72,6 +75,20 @@ class User extends Authenticatable
         ];
 
         return $rules;
+    }
+
+    public function givePermission(string $permission)
+    {
+        $meta = $this->meta;
+        $meta['permissions'][$permission] = true;
+        return $this->update(['meta' => $meta]);
+    }
+
+    public function revokePermission(string $permission)
+    {
+        $meta = $this->meta;
+        $meta['permissions'][$permission] = false;
+        return $this->update(['meta' => $meta]);
     }
 
     public function follow(User $user)
