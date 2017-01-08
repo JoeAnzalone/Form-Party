@@ -11,7 +11,9 @@ class UserPolicy
 
     public function before($user, $ability)
     {
-        if ($user->is_admin) {
+        $no_admin_overrides = ['follow', 'unfollow'];
+
+        if ($user->is_admin && !in_array($ability, $no_admin_overrides)) {
             return true;
         }
     }
