@@ -13,7 +13,8 @@
 
 Auth::routes();
 
-Route::get('/', 'MessageController@inbox')->name('inbox');
+Route::get('/', 'MessageController@dashboard')->name('dashboard');
+Route::get('inbox', 'MessageController@inbox')->name('inbox');
 
 Route::get('inbox/archive', 'MessageController@viewArchive')->name('message.viewArchive');
 Route::group(['prefix' => 'messages'], function () {
@@ -25,14 +26,14 @@ Route::group(['prefix' => 'messages'], function () {
     Route::delete('{message}', 'MessageController@delete')->name('message.delete');
 });
 
-Route::get('/invite', 'UserController@listInvites')->name('invite');
+Route::get('invite', 'UserController@listInvites')->name('invite');
 
 Route::group(['prefix' => 'users'], function () {
     Route::put('{user}/follow', 'UserController@follow')->name('user.follow');
     Route::delete('{user}/follow', 'UserController@unfollow');
 });
 
-Route::get('/settings', 'UserController@settings')->name('settings');
-Route::put('/settings', 'UserController@saveSettings');
+Route::get('settings', 'UserController@settings')->name('settings');
+Route::put('settings', 'UserController@saveSettings');
 
-Route::get('/{user}', 'UserController@profile')->name('profile');
+Route::get('{user}', 'UserController@profile')->name('profile');

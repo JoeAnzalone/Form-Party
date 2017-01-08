@@ -20,6 +20,28 @@ class MessageController extends Controller
     }
 
     /**
+     * Show the user's dashboard
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function dashboard()
+    {
+        $user = Auth::user();
+
+        $messages = Message::with('recipient')->where(function ($query) use ($user) {
+            $query->whereIn('user_id', function($query) use ($user) {
+                $query->select('followed_id')
+                    ->from('user_follows')
+                    ->where('follower_id', $user->id);
+            })->orWhere('user_id', $user->id);
+        })->where(function ($query) use ($user) {
+            $query->where('status_id', Message::STATUS_ANSWERED_PUBLICLY);
+        })->orderBy('updated_at', 'desc')->paginate(10);
+
+        return view('message.dashboard', ['messages' => $messages, 'show_heading' => true]);
+    }
+
+    /**
      * Show the user's unanswered messages
      *
      * @return \Illuminate\Http\Response

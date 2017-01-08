@@ -39,7 +39,7 @@ class Message extends Model
         return $statuses[$this->status_id];
     }
 
-    protected function recipient()
+    public function recipient()
     {
         return $this->belongsTo('App\User', 'user_id');
     }
