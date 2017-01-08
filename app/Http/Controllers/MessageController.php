@@ -29,7 +29,12 @@ class MessageController extends Controller
         $user = Auth::user();
         $messages = $user->messages()->where('status_id', Message::STATUS_UNANSWERED)->orderBy('created_at', 'desc')->paginate(10);
 
-        return view('message.inbox', ['title' =>  'Inbox', 'messages' => $messages]);
+        $title = 'Inbox';
+        $count = $user->unanswered_message_count;
+        $count = number_format($count);
+        $title = $count ? sprintf('(%s) %s', $count, $title) : $title;
+
+        return view('message.inbox', ['title' =>  $title, 'messages' => $messages]);
     }
 
     /**

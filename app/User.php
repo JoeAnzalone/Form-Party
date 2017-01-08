@@ -80,7 +80,11 @@ class User extends Authenticatable
 
     public function getUnansweredMessageCountAttribute()
     {
-        return $this->messages->where('status_id', Message::STATUS_UNANSWERED)->count();
+        if (!isset($this->attributes['unanswered_message_count'])) {
+            $this->attributes['unanswered_message_count'] = $this->messages->where('status_id', Message::STATUS_UNANSWERED)->count();
+        }
+
+        return $this->attributes['unanswered_message_count'];
     }
 
     public function invites()
