@@ -3,7 +3,6 @@
 namespace App\Policies;
 
 use App\User;
-use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class UserPolicy
@@ -17,7 +16,7 @@ class UserPolicy
      * @param  \App\User  $user
      * @return mixed
      */
-    public function view(User $user, User $user)
+    public function view(User $authedUser, User $user)
     {
         //
     }
@@ -28,7 +27,7 @@ class UserPolicy
      * @param  \App\User  $user
      * @return mixed
      */
-    public function create(User $user)
+    public function create(User $authedUser)
     {
         //
     }
@@ -40,7 +39,7 @@ class UserPolicy
      * @param  \App\User  $user
      * @return mixed
      */
-    public function update(User $user, User $user)
+    public function update(User $authedUser, User $user)
     {
         //
     }
@@ -52,8 +51,38 @@ class UserPolicy
      * @param  \App\User  $user
      * @return mixed
      */
-    public function delete(User $user, User $user)
+    public function delete(User $authedUser, User $user)
     {
         //
+    }
+
+    /**
+     * Determine whether the user can follow the user.
+     *
+     * @param  \App\User  $authedUser
+     * @param  \App\User  $user
+     * @return mixed
+     */
+    public function follow(User $authedUser, User $user)
+    {
+        return (
+            !$authedUser->is($user) &&
+            !$authedUser->following()->where(['followed_id' => $user->id])->count()
+        );
+    }
+
+    /**
+     * Determine whether the user can unfollow the user.
+     *
+     * @param  \App\User  $authedUser
+     * @param  \App\User  $user
+     * @return mixed
+     */
+    public function unfollow(User $authedUser, User $user)
+    {
+        return (
+            !$authedUser->is($user) &&
+            $authedUser->following()->where(['followed_id' => $user->id])->count()
+        );
     }
 }

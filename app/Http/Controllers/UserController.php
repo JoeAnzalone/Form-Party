@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Auth;
 use App\User;
 use App\Message;
 
@@ -55,7 +56,7 @@ class UserController extends Controller
      */
     public function listInvites()
     {
-        $user = \Auth::user();
+        $user = Auth::user();
         if (!$user->has_invites) {
             abort(404);
         }
@@ -71,9 +72,37 @@ class UserController extends Controller
      */
     public function settings()
     {
-        $user = \Auth::user();
+        $user = Auth::user();
 
         return view('user.settings', ['title' =>  'Settings', 'user' => $user, 'page' => 'settings']);
+    }
+
+    /**
+     * Follow this user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function follow(User $user)
+    {
+        $this->authorize('follow', $user);
+        Auth::user()->following()->attach($user);
+
+        $emojis = ['👭', '👬', '👫'];
+        $emoji = $emojis[array_rand($emojis)];
+
+        return redirect()->route('profile', $user->username)->with('success', sprintf('You\'re now following %s! %s', $user->username, $emoji));
+    }
+
+    /**
+     * Unfollow this user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function unfollow(User $user)
+    {
+        $this->authorize('unfollow', $user);
+        Auth::user()->following()->detach($user);
+        return redirect()->route('profile', $user->username)->with('success', sprintf('You unfollowed %s! 🙅', $user->username));
     }
 
     /**
@@ -83,7 +112,7 @@ class UserController extends Controller
      */
     public function saveSettings(Request $request)
     {
-        $user = \Auth::user();
+        $user = Auth::user();
 
         $rules = User::validationRules();
         $rules['email'] = $rules['email'] . ',' . $user->id;
