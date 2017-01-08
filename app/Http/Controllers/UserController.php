@@ -42,10 +42,27 @@ class UserController extends Controller
         ];
 
         return view('user.profile', [
+            'page' => 'profile',
             'title' =>  $title,
             'og' =>  $open_graph,
             'user' => $user,
             'messages' => $messages,
+        ]);
+    }
+
+    /**
+     * Show the list of users this user follows
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function following(User $user)
+    {
+        $users = $user->following;
+
+        return view('user.following', [
+            'page' => 'following',
+            'user' => $user,
+            'users' => $users,
         ]);
     }
 

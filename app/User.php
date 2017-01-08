@@ -195,6 +195,26 @@ class User extends Authenticatable
         return 'https://www.gravatar.com/avatar/' . $this->getEmailHash() . '?' . $query_string;
     }
 
+    public function avatarImg($size = 80, $imgSize = null)
+    {
+        $imgSize = $imgSize ?: $size;
+
+        $img = sprintf(
+            '<img src="%s" width="%d" height="%d" alt="%s avatar">',
+            e($this->avatar($size)),
+            $imgSize,
+            $imgSize,
+            e($this->username_possessive)
+        );
+
+        return sprintf('<a href="%s">%s</a>', $this->url, $img);
+    }
+
+    public function getUrlAttribute()
+    {
+        return route('profile', $this);
+    }
+
     public function getGravatarProfileUrlAttribute()
     {
         return 'https://www.gravatar.com/' . $this->getEmailHash();

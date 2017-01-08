@@ -109,6 +109,47 @@
     }
 }
 
+.users {
+    padding: 0;
+    list-style: none;
+
+    &.hide-usernames {
+        line-height: 0;
+    }
+
+    margin: 0;
+
+    > li {
+        display: inline-block;
+        text-align: center;
+        margin: 15px;
+
+        img {
+            display: block;
+            height: 100px;
+            width: 100px;
+        }
+    }
+}
+
+.page-profile {
+
+    .users > li {
+        margin: 0;
+    }
+
+    .following img {
+        height: 35px;
+        width: 35px;
+    }
+}
+
+.page-following {
+    .users {
+        text-align: center;
+    }
+}
+
 .message-body,
 .message-answer {
     margin-bottom: 15px;

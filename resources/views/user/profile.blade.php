@@ -24,6 +24,13 @@
                         <div class="user-bio">{!! nl2br(e($user->bio)) !!}</div>
                     </div>
 
+                    @if ($user->following->count())
+                    <div class="following">
+                        <h5>Following</h5>
+                        @include('user.index', ['users' => $user->following, 'show_usernames' => false])
+                    </div>
+                    @endif
+
                     @if (Auth::user() && $user->is(Auth::user())) <a class="edit-user text-center" href="{{ route('settings') }}">Edit profile</a> @endif
                 </div>
             </div>

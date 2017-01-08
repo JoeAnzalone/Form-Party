@@ -25,7 +25,7 @@
         ]); ?>
     </script>
 </head>
-<body data-page="{{ $page or 'default' }}">
+<body data-page="{{ $page or 'default' }}" class="page-{{ $page or 'default' }}">
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
