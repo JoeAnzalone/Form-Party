@@ -9,18 +9,24 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
+use App\User;
+
 class FollowCreated
 {
     use InteractsWithSockets, SerializesModels;
+
+    public $follower;
+    public $followed;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(User $follower, User $followed)
     {
-        //
+        $this->follower = $follower;
+        $this->followed = $followed;
     }
 
     /**

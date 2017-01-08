@@ -39,6 +39,7 @@ class User extends Authenticatable
         'meta' => [
             'notifications' => [
                 'new_message' => ['email' => true],
+                'new_follower' => ['email' => true],
                 'invitation_accepted' => ['email' => true],
             ],
         ],
@@ -71,6 +72,18 @@ class User extends Authenticatable
         ];
 
         return $rules;
+    }
+
+    public function follow(User $user)
+    {
+        $this->following()->attach($user);
+        event(new \App\Events\FollowCreated($this, $user));
+    }
+
+    public function unfollow(User $user)
+    {
+        $this->following()->detach($user);
+        // event(new \App\Events\FollowRemoved($this, $user));
     }
 
     public function followers()

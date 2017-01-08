@@ -165,6 +165,17 @@
                                     </div>
                                 </div>
 
+                                <div class="form-group{{ $errors->has('new_follower_email') ? ' has-error' : '' }}">
+                                    <div class="col-xs-10 col-xs-offset-2 col-sm-offset-3 col-lg-offset-4">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="new_follower_email" {{ $user->meta['notifications']['new_follower']['email'] ? 'checked' : '' }} value="1">
+                                                Someone follows me
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="form-group{{ $errors->has('invitation_accepted_email') ? ' has-error' : '' }}">
                                     <div class="col-xs-10 col-xs-offset-2 col-sm-offset-3 col-lg-offset-4">
                                         <div class="checkbox">

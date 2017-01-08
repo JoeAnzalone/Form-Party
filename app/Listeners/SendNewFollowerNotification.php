@@ -26,6 +26,17 @@ class SendNewFollowerNotification
      */
     public function handle(FollowCreated $event)
     {
-        //
+        $follower = $event->follower;
+        $followed = $event->followed;
+
+        if (!$followed->meta['notifications']['new_follower']['email']) {
+            return;
+        }
+
+        if ($followed->following()->where(['followed_id' => $follower->id])->count()) {
+            $followed->notify(new \App\Notifications\FollowedBack($follower));
+        } else {
+            $followed->notify(new \App\Notifications\NewFollower($follower));
+        }
     }
 }

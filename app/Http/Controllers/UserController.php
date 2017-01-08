@@ -85,7 +85,7 @@ class UserController extends Controller
     public function follow(User $user)
     {
         $this->authorize('follow', $user);
-        Auth::user()->following()->attach($user);
+        Auth::user()->follow($user);
 
         $emojis = ['👭', '👬', '👫'];
         $emoji = $emojis[array_rand($emojis)];
@@ -101,7 +101,7 @@ class UserController extends Controller
     public function unfollow(User $user)
     {
         $this->authorize('unfollow', $user);
-        Auth::user()->following()->detach($user);
+        Auth::user()->unfollow($user);
         return redirect()->route('profile', $user->username)->with('success', sprintf('You unfollowed %s! 🙅', $user->username));
     }
 
@@ -143,6 +143,7 @@ class UserController extends Controller
         $user_params['meta'] = [
             'notifications' => [
                 'new_message' => ['email' => !empty($user_params['new_message_email'])],
+                'new_follower' => ['email' => !empty($user_params['new_follower_email'])],
                 'invitation_accepted' => ['email' => !empty($user_params['invitation_accepted_email'])],
             ],
         ];

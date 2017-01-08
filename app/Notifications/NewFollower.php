@@ -7,6 +7,8 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
+use App\User;
+
 class NewFollower extends Notification
 {
     use Queueable;
@@ -16,9 +18,9 @@ class NewFollower extends Notification
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(User $follower)
     {
-        //
+        $this->follower = $follower;
     }
 
     /**
@@ -41,9 +43,8 @@ class NewFollower extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', 'https://laravel.com')
-                    ->line('Thank you for using our application!');
+                    ->line(sprintf('%s just followed you! Neat!', $this->follower->username))
+                    ->action(sprintf('Go see what %s is all about', $this->follower->username), route('profile', $this->follower->username));
     }
 
     /**
