@@ -21,6 +21,22 @@ class UserController extends Controller
     }
 
     /**
+     * Show the list of all users
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $this->authorize('index', User::class);
+
+        $users = User::paginate(20);
+
+        return view('user.all', [
+            'users' => $users,
+        ]);
+    }
+
+    /**
      * Show the user's profile.
      *
      * @return \Illuminate\Http\Response

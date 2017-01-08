@@ -29,6 +29,7 @@ Route::group(['prefix' => 'messages'], function () {
 Route::get('invite', 'UserController@listInvites')->name('invite');
 
 Route::group(['prefix' => 'users'], function () {
+    Route::get('/', 'UserController@index');
     Route::put('{user}/follow', 'UserController@follow')->name('user.follow');
     Route::delete('{user}/follow', 'UserController@unfollow');
 });

@@ -9,6 +9,24 @@ class UserPolicy
 {
     use HandlesAuthorization;
 
+    public function before($user, $ability)
+    {
+        if ($user->is_admin) {
+            return true;
+        }
+    }
+
+    /**
+     * Determine whether the user can view the list of all users.
+     *
+     * @param  \App\User  $authedUser
+     * @return mixed
+     */
+    public function index(User $authedUser)
+    {
+        return false;
+    }
+
     /**
      * Determine whether the user can view the user.
      *
