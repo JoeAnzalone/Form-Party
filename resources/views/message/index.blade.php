@@ -20,7 +20,7 @@
         @endif
 
         <div class="pull-right">
-            @if (Auth::user()->can('answer', $message) && !$message->answered_at)
+            @if (Auth::user() && Auth::user()->can('answer', $message) && !$message->answered_at)
                 <a class="answer-message-link btn btn-primary" href="{{ route('message.answer', $message) }}">Answer</a>
             @endcan
         </div>
