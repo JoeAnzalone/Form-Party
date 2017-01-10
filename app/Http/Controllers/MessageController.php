@@ -36,7 +36,7 @@ class MessageController extends Controller
             })->orWhere('user_id', $user->id);
         })->where(function ($query) use ($user) {
             $query->where('status_id', Message::STATUS_ANSWERED_PUBLICLY);
-        })->orderBy('updated_at', 'desc')->paginate(10);
+        })->orderBy('answered_at', 'desc')->orderBy('updated_at', 'desc')->paginate(10);
 
         return view('message.dashboard', ['messages' => $messages, 'show_heading' => true]);
     }
@@ -115,6 +115,7 @@ class MessageController extends Controller
 
         $answer = $request->input('answer');
         $message->answer = $answer;
+        $message->answered_at = $message->answered_at ?: $message->freshTimestamp();
         $message->status_id = Message::STATUS_ANSWERED_PUBLICLY;
         $message->save();
 
