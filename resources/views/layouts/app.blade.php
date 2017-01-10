@@ -65,7 +65,7 @@
                             </a></li>
                             <li {!! !empty($user) && $user->username === Auth::user()->username && Route::is('profile') ? 'class="active"' : '' !!}>
                                 <a href="{{ route('profile', Auth::user()) }}">
-                                    {!! Auth::user()->avatarImg(200, 20, false) !!} {{ Auth::user()->username }}
+                                    {{ Auth::user()->username }} {!! Auth::user()->avatarImg(200, 20, false) !!}
                                 </a>
                             </li>
                             @if (Auth::user()->has_invites && config('app.invite_only'))
