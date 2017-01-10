@@ -26,6 +26,10 @@
     position: relative;
 }
 
+.panel-body {
+    position: relative;
+}
+
 .panel-body > *:first-child {
     margin-top: 0;
 }
@@ -35,6 +39,13 @@
     font-weight: 100;
     font-family: Raleway, serif;
     text-align: center;
+}
+
+.headerless-context-menu {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px;
 }
 
 .claimed {
@@ -48,6 +59,20 @@
     text-align: center;
 }
 
+.dropdown-menu button {
+    padding: 3px 20px;
+    line-height: $line-height-base;
+    color: $dropdown-link-color;
+    text-align: left;
+
+    &:hover,
+    &:focus {
+        text-decoration: none;
+        color: $dropdown-link-hover-color;
+        background-color: $dropdown-link-hover-bg;
+  }
+}
+
 .button-form {
     display: inline-block;
 
@@ -58,6 +83,10 @@
             width: 100%;
         }
     }
+}
+
+.dropdown .button-form {
+    display: block;
 }
 
 .navbar img {

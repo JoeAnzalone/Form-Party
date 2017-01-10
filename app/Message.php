@@ -39,6 +39,11 @@ class Message extends Model
         return $statuses[$this->status_id];
     }
 
+    protected function getisPublicAttribute()
+    {
+        return $this->status_id === self::STATUS_ANSWERED_PUBLICLY;
+    }
+
     public function recipient()
     {
         return $this->belongsTo('App\User', 'user_id');
