@@ -101,6 +101,15 @@
 
 .inbox-nav {
     margin-bottom: 15px;
+
+    > li + li {
+        margin-left: 5px;
+    }
+
+    li a {
+        padding: 5px 10px;
+        font-size: 13px;
+    }
 }
 
 .pagination-wrapper {

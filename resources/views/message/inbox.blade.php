@@ -12,7 +12,7 @@
                         <div class="col-xs-12">
                             <ul class="nav nav-pills inbox-nav">
                                 <li role="presentation" {!! Route::is('inbox') ? 'class="active"' : '' !!}><a href="{{ route('inbox') }}">Unanswered</a></li>
-                                <li role="presentation" {!! Route::is('message.viewArchive') ? 'class="active"' : '' !!}><a href="{{ route('message.viewArchive') }}">Archive</a></li>
+                                <li role="presentation" {!! Route::is('message.viewArchive') ? 'class="active"' : '' !!}><a href="{{ route('message.viewArchive') }}">Archived</a></li>
                             </ul>
                         </div>
                     </div>
