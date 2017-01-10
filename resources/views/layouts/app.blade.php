@@ -37,6 +37,9 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
+                        @if (Auth::user()->unanswered_message_count)
+                            <span class="badge hamburger-menu-badge">{{ Auth::user()->unanswered_message_count }}</span>
+                        @endif
                     </button>
 
                     <!-- Branding Image -->
