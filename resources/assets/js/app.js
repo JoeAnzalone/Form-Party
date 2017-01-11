@@ -82,3 +82,22 @@ if (document.body.dataset.page == 'settings') {
         document.querySelector('.password-confirm-wrapper').style.display = 'block';
     });
 }
+
+$(document).ready(function() {
+    var gmtOffset = -new Date().getTimezoneOffset() / 60;
+
+    if (gmtOffset === Laravel.gmtOffset) {
+        // time's already set good
+        console.log('time\'s already set good');
+        return;
+    }
+
+    Vue.http.put('/timezone', {
+        'gmt_offset': gmtOffset,
+    }).then((response) => {
+        // success
+        // location.reload();
+    }, (response) => {
+        // error
+    });
+});

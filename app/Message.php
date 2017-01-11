@@ -33,11 +33,19 @@ class Message extends Model
 
     public function getCreatedAtAttribute($value)
     {
+        if (empty($value)) {
+            return null;
+        }
+
         return Carbon::createFromFormat($this->getDateFormat(), $value)->timezone(Session::get('timezone', 'America/New_York'));
     }
 
     public function getAnsweredAtAttribute($value)
     {
+        if (empty($value)) {
+            return null;
+        }
+
         return Carbon::createFromFormat($this->getDateFormat(), $value)->timezone(Session::get('timezone', 'America/New_York'));
     }
 

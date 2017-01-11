@@ -22,6 +22,7 @@
     <script>
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
+            'gmtOffset' => Session::get('gmt_offset', -5),
         ]); ?>
     </script>
 </head>

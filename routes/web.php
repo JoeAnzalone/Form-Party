@@ -36,6 +36,7 @@ Route::group(['prefix' => 'users'], function () {
 
 Route::get('settings', 'UserController@settings')->name('settings');
 Route::put('settings', 'UserController@saveSettings');
+Route::any('timezone', 'SessionController@setTimezone');
 
 Route::get('{user}', 'UserController@profile')->name('profile');
 Route::get('{user}/following', 'UserController@following')->name('user.following');
