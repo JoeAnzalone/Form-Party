@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Session;
+use Carbon\Carbon;
 
 class Message extends Model
 {
@@ -30,9 +31,14 @@ class Message extends Model
     const STATUS_ANSWERED_PUBLICLY = 1;
     const STATUS_ARCHIVED = 2;
 
-    public function asDateTime($value)
+    public function getCreatedAtAttribute($value)
     {
-        return parent::asDateTime($value)->timezone(Session::get('gmt_offset', -5));
+        return Carbon::createFromFormat($this->getDateFormat(), $value)->timezone(Session::get('timezone', 'America/New_York'));
+    }
+
+    public function getAnsweredAtAttribute($value)
+    {
+        return Carbon::createFromFormat($this->getDateFormat(), $value)->timezone(Session::get('timezone', 'America/New_York'));
     }
 
     protected function getStatusAttribute()

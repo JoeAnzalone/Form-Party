@@ -9,12 +9,12 @@
 
             {{ $message->answer ? 'replied to' : 'shared' }} this anonymous message
 
-            <a class="permalink" title="{{ $message->answered_at->format('D, F jS Y @ h:i:s a') }}" href="{{ route('message.permalink', [$message->recipient, $message]) }}">
+            <a class="permalink" title="{{ $message->answered_at->format('D, F jS Y @ g:i:s a') }}" href="{{ route('message.permalink', [$message->recipient, $message]) }}">
                 {{ $message->answered_at->diffForHumans() }}
             </a>
         @else
             Someone sent you this
-            <span title="{{ $message->created_at->format('D, F jS Y @ h:i:s a') }}">
+            <span title="{{ $message->created_at->format('D, F jS Y @ g:i:s a') }}">
                 {{ $message->created_at->diffForHumans() }}
             </span>
         @endif
