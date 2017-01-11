@@ -39,3 +39,4 @@ Route::put('settings', 'UserController@saveSettings');
 
 Route::get('{user}', 'UserController@profile')->name('profile');
 Route::get('{user}/following', 'UserController@following')->name('user.following');
+Route::get('{username}/message/{message}', 'MessageController@permalink')->name('message.permalink');

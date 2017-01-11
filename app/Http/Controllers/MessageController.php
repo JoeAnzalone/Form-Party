@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Message;
+use App\User;
 
 class MessageController extends Controller
 {
@@ -90,6 +91,29 @@ class MessageController extends Controller
         $message->save();
         $recipient = \App\User::findOrFail($recipient_id);
         return redirect($recipient->username)->with('success', sprintf('Message sent to %s! 😃', $recipient->username));
+    }
+
+    /**
+     * Show the message
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function permalink(string $username, Message $message)
+    {
+        $this->authorize('view', $message);
+
+        $message_username = $message->recipient->username;
+
+        if (strcasecmp($username, $message_username) !== 0) {
+            // The username supplied in the URL doesn't match the recipient
+            // We should trust the message ID, not the username
+            // (Usernames can change after the permalink has been shared)
+
+            // Redirect to the proper username
+            return redirect()->route('message.permalink', [$message_username, $message]);
+        }
+
+        return view('message.answer_form', ['message' => $message]);
     }
 
     /**

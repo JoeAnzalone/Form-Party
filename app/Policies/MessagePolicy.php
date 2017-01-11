@@ -19,7 +19,7 @@ class MessagePolicy
      */
     public function view(User $user, Message $message)
     {
-        //
+        return $message->is_public || $user->is($message->recipient);
     }
 
     /**
