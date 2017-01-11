@@ -39,7 +39,7 @@ class MessageController extends Controller
             $query->where('status_id', Message::STATUS_ANSWERED_PUBLICLY);
         })->orderBy('answered_at', 'desc')->orderBy('updated_at', 'desc')->paginate(10);
 
-        return view('message.dashboard', ['messages' => $messages, 'show_heading' => true]);
+        return view('message.dashboard', ['messages' => $messages]);
     }
 
     /**

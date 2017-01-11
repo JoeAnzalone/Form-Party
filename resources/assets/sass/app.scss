@@ -41,13 +41,6 @@
     text-align: center;
 }
 
-.headerless-context-menu {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 10px;
-}
-
 .claimed {
     opacity: 0.5;
     text-decoration: line-through;
@@ -202,6 +195,16 @@
 .page-following {
     .users {
         text-align: center;
+    }
+}
+
+.message {
+    .avatar {
+        margin-right: 5px;
+    }
+
+    .permalink {
+        color: inherit;
     }
 }
 

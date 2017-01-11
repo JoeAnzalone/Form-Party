@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Session;
 
 class Message extends Model
 {
@@ -23,11 +24,16 @@ class Message extends Model
      *
      * @var array
      */
-    protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at', 'answered_at'];
 
     const STATUS_UNANSWERED = 0;
     const STATUS_ANSWERED_PUBLICLY = 1;
     const STATUS_ARCHIVED = 2;
+
+    public function asDateTime($value)
+    {
+        return parent::asDateTime($value)->timezone(Session::get('gmt_offset', -5));
+    }
 
     protected function getStatusAttribute()
     {
