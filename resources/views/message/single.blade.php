@@ -1,6 +1,4 @@
-@foreach ($messages as $message)
 <div class="panel panel-default message {{ $message->answer ? 'has-answer' : 'no-answer' }}">
-
     @if (!empty($show_heading))
     <div class="panel-heading">
         <a href="{{ route('profile', $message->recipient->username) }}">
@@ -31,9 +29,4 @@
             </div>
         @endif
     </div>
-</div>
-@endforeach
-
-<div class="pagination-wrapper">
-    {{ $messages->links() }}
 </div>

@@ -18,7 +18,13 @@
                     </div>
 
                     @if (count($messages))
-                        @include('message.index', ['messages' => $messages])
+                        @foreach ($messages as $message)
+                            @include('message.single')
+                        @endforeach
+
+                        <div class="pagination-wrapper">
+                            {{ $messages->links() }}
+                        </div>
                     @else
                         <p>You have no messages</p>
                     @endif

@@ -9,7 +9,13 @@
 
                 <div class="panel-body">
                     @if (count($messages))
-                        @include('message.index', ['messages' => $messages])
+                        @foreach ($messages as $message)
+                            @include('message.single')
+                        @endforeach
+
+                        <div class="pagination-wrapper">
+                            {{ $messages->links() }}
+                        </div>
                     @else
                         <p>Your dashboard is empty! 🙊</p>
                     @endif
