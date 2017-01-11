@@ -88,6 +88,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Custom Validation Rules
+    |--------------------------------------------------------------------------
+    |
+    | These language lines are used for custom validation
+    | rules that are set someplace in an App\Validators class.
+    |
+    */
+
+    'reserved_username' => 'The :attribute has already been taken.',
+
+    /*
+    |--------------------------------------------------------------------------
     | Custom Validation Language Lines
     |--------------------------------------------------------------------------
     |

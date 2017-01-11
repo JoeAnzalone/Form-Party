@@ -69,7 +69,7 @@ class User extends Authenticatable
         $min_str = !($user && $user->can('shortUsername', User::class)) ? 'min:4|' : '';
 
         $rules = [
-            'username' => 'required|alpha_num|' . $min_str . 'max:32|unique:users,username',
+            'username' => 'reserved_username|required|alpha_num|' . $min_str . 'max:32|unique:users,username',
             'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|min:6|confirmed',
         ];
