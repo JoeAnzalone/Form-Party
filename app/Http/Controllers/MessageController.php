@@ -113,7 +113,7 @@ class MessageController extends Controller
             return redirect()->route('message.permalink', [$message_username, $message]);
         }
 
-        return view('message.permalink', ['message' => $message]);
+        return view('message.permalink', ['message' => $message, 'summarized' => false]);
     }
 
     /**

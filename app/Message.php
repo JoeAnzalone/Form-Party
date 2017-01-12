@@ -31,6 +31,8 @@ class Message extends Model
     const STATUS_ANSWERED_PUBLICLY = 1;
     const STATUS_ARCHIVED = 2;
 
+    const SUMMARY_LENGTH = 1000;
+
     public function getCreatedAtAttribute($value)
     {
         if (empty($value)) {
@@ -62,6 +64,16 @@ class Message extends Model
     protected function getisPublicAttribute()
     {
         return $this->status_id === self::STATUS_ANSWERED_PUBLICLY;
+    }
+
+    protected function getBodySummaryAttribute()
+    {
+        return str_limit($this->attributes['body'], self::SUMMARY_LENGTH);
+    }
+
+    protected function getAnswerSummaryAttribute()
+    {
+        return str_limit($this->attributes['answer'], self::SUMMARY_LENGTH);
     }
 
     public function recipient()

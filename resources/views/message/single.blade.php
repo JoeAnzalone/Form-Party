@@ -1,3 +1,6 @@
+<?php
+    $summarized = isset($summarized) ? $summarized : true;
+?>
 <div class="panel panel-default message {{ $message->answer ? 'has-answer' : 'no-answer' }}">
     <div class="panel-heading">
         @if ($message->answered_at)
@@ -22,10 +25,28 @@
         @include('message.context-menu')
     </div>
     <div class="panel-body">
-        <blockquote class="message-body">{!! nl2br(e($message->body)) !!}</blockquote>
+        <blockquote class="message-body">
+            @if ($summarized)
+                {!! nl2br(e($message->body_summary)) !!}
+                @if (strlen($message->body) > App\Message::SUMMARY_LENGTH)
+                    <a href="{{ route('message.permalink', [$message->recipient->username, $message]) }}">Keep reading ⧁</a>
+                @endif
+            @else
+                {!! nl2br(e($message->body)) !!}
+            @endif
+        </blockquote>
 
         @if ($message->answer)
-            <div class="message-answer">{!! nl2br(e($message->answer)) !!}</div>
+            <div class="message-answer">
+                @if ($summarized)
+                    {!! nl2br(e($message->answer_summary)) !!}
+                    @if (strlen($message->answer) > App\Message::SUMMARY_LENGTH)
+                        <a href="{{ route('message.permalink', [$message->recipient->username, $message]) }}">Keep reading ⧁</a>
+                    @endif
+                @else
+                    {!! nl2br(e($message->answer)) !!}
+                @endif
+            </div>
         @endif
 
         <div class="pull-right">
