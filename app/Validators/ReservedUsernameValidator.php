@@ -11,7 +11,7 @@ class ReservedUsernameValidator
      */
     public function validate($attribute, $value, $parameters, $validator)
     {
-        return !in_array($value, $this->reserved_usernames);
+        return !in_array(strtolower($value), $this->reserved_usernames);
     }
 
     protected $reserved_usernames = [
