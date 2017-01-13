@@ -17,7 +17,7 @@ class MessageController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except' => 'store']);
+        $this->middleware('auth', ['except' => ['store', 'permalink']]);
     }
 
     /**
@@ -100,7 +100,9 @@ class MessageController extends Controller
      */
     public function permalink(string $username, Message $message)
     {
-        $this->authorize('view', $message);
+        if (!$message->is_public && !Auth::user()->is($message->recipient)) {
+            throw new \Illuminate\Auth\Access\AuthorizationException('Not allowed to see this message');
+        }
 
         $message_username = $message->recipient->username;
 
