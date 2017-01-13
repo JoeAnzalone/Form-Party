@@ -41,7 +41,18 @@ document.querySelectorAll('button.delete').forEach(function(el) {
     });
 });
 
-if (document.body.dataset.page == 'invite') {
+if (document.body.dataset.page === 'profile') {
+    document.querySelectorAll('[data-js-focus-message-box]').forEach(function(el) {
+        el.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('message').focus();
+            return false;
+        });
+    });
+}
+
+
+if (document.body.dataset.page === 'invite') {
     document.querySelectorAll('.invite-codes .unclaimed').forEach(function(el) {
         el.addEventListener('click', function(e) {
             e.preventDefault();
@@ -51,7 +62,7 @@ if (document.body.dataset.page == 'invite') {
     });
 }
 
-if (document.body.dataset.page == 'settings') {
+if (document.body.dataset.page === 'settings') {
     document.querySelectorAll('[data-requires-password-if-changed]').forEach(function(el) {
         // If the input field requires the current password to be entered before updating,
         // add the requiresPasswordBeforeSubmit data attribute to the form so it can be checked before submitting

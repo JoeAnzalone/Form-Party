@@ -72,13 +72,4 @@
     </div>
 </div>
 
-<script type="text/JavaScript">
-    document.querySelectorAll('[data-js-focus-message-box]').forEach(function(el) {
-        el.addEventListener('click', function(e) {
-            e.preventDefault();
-            document.getElementById('message').focus();
-            return false;
-        });
-    });
-</script>
 @endsection
