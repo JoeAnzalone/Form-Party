@@ -100,8 +100,8 @@ class MessageController extends Controller
      */
     public function permalink(string $username, Message $message)
     {
-        if (!$message->is_public && !Auth::user()->is($message->recipient)) {
-            throw new \Illuminate\Auth\Access\AuthorizationException('Not allowed to see this message');
+        if (!$message->is_public) {
+            $this->authorize('view', $message);
         }
 
         $message_username = $message->recipient->username;
