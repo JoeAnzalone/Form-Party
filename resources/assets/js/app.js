@@ -69,6 +69,7 @@ if (document.body.dataset.page == 'settings') {
         if (e.target.dataset.requiresPasswordBeforeSubmit === '' && !currentPass.value) {
             document.querySelector('.profile-panel').style.display = 'none';
             document.querySelector('.account-panel').style.display = 'none';
+            document.querySelector('.notifications-panel').style.display = 'none';
             document.querySelector('.confirm-password-panel').style.display = 'block';
             currentPass.focus();
         } else {

@@ -129,28 +129,7 @@
                             </div>
                         </div>
 
-                        <div class="panel panel-default confirm-password-panel" style="display: none;">
-                            <div class="panel-heading text-center">Account</div>
-                            <div class="panel-body">
-                                <p>Confirm existing password to continue</p>
-                                <div class="form-group{{ $errors->has('current_password') ? ' has-error' : '' }}">
-                                    <label for="current-password" class="col-md-4 control-label">Current Password</label>
-
-                                    <div class="col-md-6">
-                                        <input id="current-password" type="password" class="form-control" name="current-password">
-
-                                        @if ($errors->has('current_password'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('current_password') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="panel panel-default">
+                        <div class="panel panel-default notifications-panel">
                             <div class="panel-heading text-center">Notifications</div>
                             <div class="panel-body">
                                 <p class="text-center">Email me when:</p>
@@ -184,6 +163,27 @@
                                                 Someone uses one of my invite codes
                                             </label>
                                         </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default confirm-password-panel" style="display: none;">
+                            <div class="panel-heading text-center">Account</div>
+                            <div class="panel-body">
+                                <p>Confirm existing password to continue</p>
+                                <div class="form-group{{ $errors->has('current_password') ? ' has-error' : '' }}">
+                                    <label for="current-password" class="col-md-4 control-label">Current Password</label>
+
+                                    <div class="col-md-6">
+                                        <input id="current-password" type="password" class="form-control" name="current-password">
+
+                                        @if ($errors->has('current_password'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('current_password') }}</strong>
+                                            </span>
+                                        @endif
                                     </div>
                                 </div>
 
