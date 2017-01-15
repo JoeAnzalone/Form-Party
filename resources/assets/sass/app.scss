@@ -8,6 +8,8 @@
 // Bootstrap
 @import 'node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
 
+@import 'messages';
+
 [data-page="invite"] {
     @import 'pages/invite';
 }
@@ -204,26 +206,6 @@
     .users {
         text-align: center;
     }
-}
-
-.message {
-    .avatar {
-        margin-right: 5px;
-    }
-
-    .permalink {
-        color: inherit;
-    }
-}
-
-.message-body,
-.message-answer {
-    margin-bottom: 15px;
-}
-
-.message-body:last-child,
-.message-answer:last-child {
-    margin-bottom: 0;
 }
 
 .logout-link {

@@ -29,7 +29,7 @@
             @if ($summarized)
                 {!! nl2br(e($message->body_summary)) !!}
                 @if (strlen($message->body) > App\Message::SUMMARY_LENGTH)
-                    <a href="{{ route('message.permalink', [$message->recipient->username, $message]) }}">Keep reading ⧁</a>
+                    <a class="keep-reading-link" href="{{ route('message.permalink', [$message->recipient->username, $message]) }}">Keep reading ⧁</a>
                 @endif
             @else
                 {!! nl2br(e($message->body)) !!}
@@ -41,7 +41,7 @@
                 @if ($summarized)
                     {!! nl2br(e($message->answer_summary)) !!}
                     @if (strlen($message->answer) > App\Message::SUMMARY_LENGTH)
-                        <a href="{{ route('message.permalink', [$message->recipient->username, $message]) }}">Keep reading ⧁</a>
+                        <a class="keep-reading-link" href="{{ route('message.permalink', [$message->recipient->username, $message]) }}">Keep reading ⧁</a>
                     @endif
                 @else
                     {!! nl2br(e($message->answer)) !!}
