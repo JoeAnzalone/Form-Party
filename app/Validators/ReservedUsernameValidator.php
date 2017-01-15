@@ -64,6 +64,7 @@ class ReservedUsernameValidator
         'login',
         'logout',
         'register',
+        'search',
         'invite',
         'invites',
         'follow',

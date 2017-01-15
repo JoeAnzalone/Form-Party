@@ -12,6 +12,10 @@
     @import 'pages/invite';
 }
 
+[data-page="search"] {
+    @import 'pages/search';
+}
+
 [rel="external"]:after {
     content: '\00a0↗️';
 }

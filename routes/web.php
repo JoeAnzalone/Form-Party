@@ -35,6 +35,8 @@ Route::group(['prefix' => 'users'], function () {
     Route::delete('{user}/follow', 'UserController@unfollow');
 });
 
+Route::get('search/{query?}', 'SearchController@search')->name('search');
+
 Route::get('settings', 'UserController@settings')->name('settings');
 Route::put('settings', 'UserController@saveSettings');
 Route::any('timezone', 'SessionController@setTimezone');
