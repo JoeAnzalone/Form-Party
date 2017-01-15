@@ -31,7 +31,7 @@ class Message extends Model
     const STATUS_ANSWERED_PUBLICLY = 1;
     const STATUS_ARCHIVED = 2;
 
-    const SUMMARY_LENGTH = 1000;
+    const SUMMARY_LENGTH = 300;
 
     public function getCreatedAtAttribute($value)
     {
