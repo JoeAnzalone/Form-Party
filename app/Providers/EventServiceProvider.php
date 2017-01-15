@@ -14,7 +14,7 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         'App\Events\UserCreated' => ['App\Listeners\SendWelcomeMessage', 'App\Listeners\GiveInvites'],
-        'App\Events\InvitationAccepted' => ['App\Listeners\SendInvitationAcceptedNotification'],
+        'App\Events\InvitationAccepted' => ['App\Listeners\SendInvitationAcceptedNotification', 'App\Listeners\AutofollowFromInvite'],
         'App\Events\MessageSent' => ['App\Listeners\SendMessageNotification',],
         'App\Events\FollowCreated' => ['App\Listeners\SendNewFollowerNotification',],
     ];
