@@ -5,29 +5,63 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Invite</div>
+                <div class="panel-heading">Invite Codes</div>
                 <div class="panel-body">
-                    <h2>Your Invite Codes</h2>
-                    <p>{{ config('app.name') }} is currently in beta, so new users will need an invite code to sign up.</p>
 
 
-                    @if (count($invites->where('claimed_by_id', null)))
-                        <p>Luckily for your friends, you just happen to have <em>{{ count($invites->where('claimed_by_id', null)) }}</em> unused {{ str_plural('code', count($invites->where('claimed_by_id', null))) }} right here!</p>
-                        <p>Each invite code can only be used once, so make sure the recipient is worthy! 😉</p>
-                    @else
-                        <p>Unfortunately all your invite codes have been used up :(</p>
+                    @if (!empty(\Session::get('invite_created')))
+                        <div class="alert alert-success">
+                            <p>An invite code has been created for <b>{{ \Session::get('invite_created')['name'] }}</b>!</p>
+                            <p>Copy this URL and send it to them so they can join you on {{ config('app.name') }}!</p>
+                            <input type="text" class="form-control invite-url-input" data-original-value="{{ \Session::get('invite_created')['url'] }}" value="{{ \Session::get('invite_created')['url'] }}">
+                        </div>
                     @endif
 
-                    <ul class="invite-codes">
-                    @foreach ($invites as $invite)
-                        <li>
-                            <code><a class="{{ $invite->claimed_by ? 'claimed' : 'unclaimed' }}" href="{{ $invite->url }}">{{ $invite->code }}</a></code>
-                            @if ($invite->claimed_by)
-                            - claimed by <a href="{{ route('profile', $invite->claimed_by->username) }}">{{ $invite->claimed_by->username }}</a>
-                            @endif
-                        </li>
-                    @endforeach
-                    </ul>
+                    <p>{{ config('app.name') }} is currently in beta, so new users will need their own unique invite link to sign up.</p>
+
+                    @if (count($invites['unused']))
+                        <p>Luckily for your friends, you can generate <em>{{ count($invites['unused']) }}</em> more {{ str_plural('code', count($invites['unused'])) }} right here!</p>
+                        <form class="form-inline generate-invite" method="POST" action="{{ route('invite.create') }}">
+                            {{ csrf_field() }}
+
+                            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                                <label for="name" class="control-label sr-only">Name</label>
+                                    <span class="help-block sr-only">The name of the person you're inviting</span>
+                                    <input class="form-control" id="name" name="name" type="text" value="{{ old('name') }}" placeholder="Invitee name" required>
+                                <button type="submit" class="btn btn-primary">Generate</button>
+                                @if ($errors->has('name'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </form>
+                    @else
+                        <p>Unfortunately all your invite codes have been given out 😞</p>
+                    @endif
+
+                    @if (count($invites['pending']))
+                        <h4>Pending Invites</h4>
+                        <div class="help-block">These invites have not been claimed yet. Click on a name to reveal its unique invite link.</div>
+                        <ul class="invite-codes">
+                        @foreach ($invites['pending'] as $invite)
+                            <li>
+                                <a class="{{ $invite->claimed_by ? 'claimed' : 'unclaimed' }}" href="{{ $invite->url }}">{{ $invite->name or 'A nameless invite' }}</a>
+                            </li>
+                        @endforeach
+                        </ul>
+                    @endif
+
+                    @if (count($invites['claimed']))
+                    <div class="invited-users">
+                        <h4>Users you've invited</h4>
+                        <ul>
+                        @foreach ($invites['claimed'] as $invite)
+                            <li><a href="{{ route('profile', $invite->claimed_by->username) }}">{!! $invite->claimed_by->avatarImg(200, 20, false) !!} {{ $invite->claimed_by->username }}</a></li>
+                        @endforeach
+                        </ul>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>

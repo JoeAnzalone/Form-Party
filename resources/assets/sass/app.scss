@@ -8,6 +8,10 @@
 // Bootstrap
 @import 'node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
 
+[data-page="invite"] {
+    @import 'pages/invite';
+}
+
 [rel="external"]:after {
     content: '\00a0↗️';
 }

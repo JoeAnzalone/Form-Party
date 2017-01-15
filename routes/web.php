@@ -26,7 +26,8 @@ Route::group(['prefix' => 'messages'], function () {
     Route::delete('{message}', 'MessageController@delete')->name('message.delete');
 });
 
-Route::get('invite', 'UserController@listInvites')->name('invite');
+Route::get('invite', 'InviteController@index')->name('invite');
+Route::post('invite/create', 'InviteController@create')->name('invite.create');
 
 Route::group(['prefix' => 'users'], function () {
     Route::get('/', 'UserController@index');

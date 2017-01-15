@@ -60,6 +60,21 @@ if (document.body.dataset.page === 'invite') {
             return false;
         });
     });
+
+    document.querySelectorAll('input.invite-url-input').forEach(function(el) {
+        el.addEventListener('blur', function(e) {
+            el.value = el.dataset.originalValue;
+        });
+
+        el.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            el.select();
+            document.execCommand('copy');
+
+            return false;
+        });
+    });
 }
 
 if (document.body.dataset.page === 'settings') {
