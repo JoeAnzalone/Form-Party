@@ -1,4 +1,4 @@
-<form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
+<form class="form-horizontal{{ $errors->count() ? ' has-error' : '' }}" role="form" method="POST" action="{{ url('/login') }}">
     {{ csrf_field() }}
 
     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -6,12 +6,6 @@
 
         <div class="col-md-6">
             <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
-
-            @if ($errors->has('email'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('email') }}</strong>
-                </span>
-            @endif
         </div>
     </div>
 
@@ -21,9 +15,9 @@
         <div class="col-md-6">
             <input id="password" type="password" class="form-control" name="password" required>
 
-            @if ($errors->has('password'))
+            @if ($errors->count())
                 <span class="help-block">
-                    <strong>{{ $errors->first('password') }}</strong>
+                    <strong>{{ $errors->first() }}</strong>
                 </span>
             @endif
         </div>
