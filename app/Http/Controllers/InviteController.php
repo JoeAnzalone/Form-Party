@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\Invite;
 
 class InviteController extends Controller
 {
@@ -42,22 +43,32 @@ class InviteController extends Controller
 
     /**
      * Attach a name to a pre-made invite code, and reveal it to the user.
+     * If the user is out of pre-made invites, and has proper permission, create
+     * a new model in the database
      *
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
     {
         $user = Auth::user();
+        $name = trim($request->name);
+
+        if (!$name) {
+            return redirect()->route('invite')->withErrors(['name' => 'Please supply a name for this invite']);
+        }
 
         $invite = $user->invites()->where('name', null)->where('claimed_by_id', null)->first();
 
-        if (trim($request->name) && $invite) {
-            $invite->update(['name' => $request->name]);
-            return redirect()->route('invite')->with([
-                'invite_created' => ['name' => $invite->name, 'url' => $invite->url]
-            ]);
+        if ($invite) {
+            $invite->update(['name' => $name]);
+        } elseif ($user->can('create', Invite::class)) {
+            $invite = $user->invites()->create(['name' => $name]);
+        } else {
+            return redirect()->route('invite')->withErrors(['name' => 'Something went wrong :(']);
         }
 
-        return redirect()->route('invite')->withErrors(['name' => 'Something went wrong :(']);
+        return redirect()->route('invite')->with([
+            'invite_created' => ['name' => $invite->name, 'url' => $invite->url]
+        ]);
     }
 }

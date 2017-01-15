@@ -5,13 +5,13 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Invite Codes</div>
+                <div class="panel-heading">Invite Links</div>
                 <div class="panel-body">
 
 
                     @if (!empty(\Session::get('invite_created')))
                         <div class="alert alert-success">
-                            <p>An invite code has been created for <b>{{ \Session::get('invite_created')['name'] }}</b>!</p>
+                            <p>An invite link has been created for <b>{{ \Session::get('invite_created')['name'] }}</b>!</p>
                             <p>Copy this URL and send it to them so they can join you on {{ config('app.name') }}!</p>
                             <input type="text" class="form-control invite-url-input" data-original-value="{{ \Session::get('invite_created')['url'] }}" value="{{ \Session::get('invite_created')['url'] }}">
                         </div>
@@ -19,8 +19,14 @@
 
                     <p>{{ config('app.name') }} is currently in beta, so new users will need their own unique invite link to sign up.</p>
 
-                    @if (count($invites['unused']))
-                        <p>Luckily for your friends, you can generate <em>{{ count($invites['unused']) }}</em> more {{ str_plural('code', count($invites['unused'])) }} right here!</p>
+                    @if (count($invites['unused']) || Auth::user()->can('create', App\Invite::class))
+
+                        @can('create', App\Invite::class)
+                            <p>Luckily for your friends, you can generate as many links as you need right here!</p>
+                        @else
+                            <p>Luckily for your friends, you can generate <em>{{ count($invites['unused']) }}</em> more {{ str_plural('link', count($invites['unused'])) }} right here!</p>
+                        @endcan
+
                         <form class="form-inline generate-invite" method="POST" action="{{ route('invite.create') }}">
                             {{ csrf_field() }}
 
@@ -37,7 +43,7 @@
                             </div>
                         </form>
                     @else
-                        <p>Unfortunately all your invite codes have been given out 😞</p>
+                        <p>Unfortunately all your invite links have been given out 😞</p>
                     @endif
 
                     @if (count($invites['pending']))
