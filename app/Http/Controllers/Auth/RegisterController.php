@@ -91,12 +91,19 @@ class RegisterController extends Controller
 
         $alert = false;
         if ($invite) {
-            $alert = sprintf(
-                '<a target="_blank" href="%s">%s</a> has invited you to check out %s!',
-                route('profile', $invite->user->username),
-                $invite->user->username,
-                config('app.name')
-            );
+            if ($invite->user) {
+                $alert = sprintf(
+                    '<a target="_blank" href="%s">%s</a> has invited you to check out %s!',
+                    route('profile', $invite->user->username),
+                    $invite->user->username,
+                    config('app.name')
+                );
+            } else {
+                $alert = sprintf(
+                    'You\'ve been invited you to check out %s!',
+                    config('app.name')
+                );
+            }
         }
 
         return view('auth.register', ['title' => 'Register', 'invite' => $invite, 'info' => $alert]);
