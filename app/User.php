@@ -91,10 +91,13 @@ class User extends Authenticatable
         return $this->update(['meta' => $meta]);
     }
 
-    public function follow(User $user)
+    public function follow(User $user, bool $raise_event = true)
     {
         $this->following()->attach($user);
-        event(new \App\Events\FollowCreated($this, $user));
+
+        if ($raise_event) {
+            event(new \App\Events\FollowCreated($this, $user));
+        }
     }
 
     public function unfollow(User $user)

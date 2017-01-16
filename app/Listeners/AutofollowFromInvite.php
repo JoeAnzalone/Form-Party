@@ -26,6 +26,9 @@ class AutofollowFromInvite
      */
     public function handle(InvitationAccepted $event)
     {
-        //
+        $invite = $event->invite;
+
+        $invite->user->follow($invite->claimed_by, false);
+        $invite->claimed_by->follow($invite->user, false);
     }
 }
